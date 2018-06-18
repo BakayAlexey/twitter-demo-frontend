@@ -6,7 +6,7 @@ import IconMoments from "./IconMoments.svg";
 import IconNotifications from "./IconNotifications.svg";
 import IconMessages from "./IconMessages.svg";
 
-const NavStyled = styled.nav`
+const Nav = styled.nav`
   display: flex;
   align-items: center;
   margin-right: auto;
@@ -37,7 +37,7 @@ const Text = styled.span`
 
 const MainNav = () => {
   return (
-    <NavStyled>
+    <Nav>
       <LinkStyled to="/home">
         <Icon src={IconHome} alt="Home" />
         <Text>Home</Text>
@@ -54,7 +54,7 @@ const MainNav = () => {
         <Icon src={IconMessages} alt="Messages" />
         <Text>Messages</Text>
       </LinkStyled>
-    </NavStyled>
+    </Nav>
   );
 };
 

@@ -36,19 +36,19 @@ const Button = styled.button`
   }
 `;
 
-const SearchFormStyled = styled.form`
+const Form = styled.form`
   position: relative;
   width: 220px;
 `;
 
 function SearchForm() {
   return (
-    <SearchFormStyled>
+    <Form>
       <Input type="text" placeholder="Search Twitter" />
       <Button type="submit">
         <img src={IconMagnifier} alt="btn-search" />
       </Button>
-    </SearchFormStyled>
+    </Form>
   );
 }
 
