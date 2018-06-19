@@ -8,6 +8,13 @@ const Nav = styled.div`
   margin-right: auto;
 `;
 
+const Name = styled.div``;
+
+const Amount = styled.div`
+  font-size: 18px;
+  color: #707e88;
+`;
+
 const LinkStyled = styled(NavLink)`
   display: flex;
   flex-direction: column;
@@ -20,13 +27,13 @@ const LinkStyled = styled(NavLink)`
   color: #707e88;
   text-align: center;
   text-decoration: none;
-`;
-
-const Name = styled.div``;
-
-const Amount = styled.div`
-  font-size: 18px;
-  color: #707e88;
+  &:hover {
+    color: #1da1f2;
+    border-bottom: 4px solid #1da1f2;
+  }
+  &:hover ${Amount} {
+    color: #1da1f2;
+  }
 `;
 
 const Statistics = () => {
@@ -77,7 +84,6 @@ const Button = styled.button`
   line-height: 14px;
   font-weight: bold;
   color: #1da1f2;
-  letter-spacing: 0.01px;
   text-align: center;
   cursor: pointer;
 `;

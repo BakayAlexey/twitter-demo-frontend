@@ -48,7 +48,6 @@ const ButtonTweet = styled.button`
   line-height: 14px;
   font-weight: bold;
   color: #ffffff;
-  letter-spacing: 0.01px;
   text-align: center;
   cursor: pointer;
 `;

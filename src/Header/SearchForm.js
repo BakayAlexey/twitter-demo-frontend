@@ -14,7 +14,10 @@ const Input = styled.input`
   font-weight: normal;
   line-height: 14px;
   color: #687b8a;
-  letter-spacing: 0.01px;
+  &:focus {
+    outline: none;
+    border: 1px solid #3b94d9;
+  }
 `;
 
 const Button = styled.button`

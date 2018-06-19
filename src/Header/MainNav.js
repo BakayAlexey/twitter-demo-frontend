@@ -1,26 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { Route, NavLink } from "react-router-dom";
 import IconHome from "./IconHome.svg";
 import IconMoments from "./IconMoments.svg";
 import IconNotifications from "./IconNotifications.svg";
 import IconMessages from "./IconMessages.svg";
+import ProfilePage from "../ProfilePage";
 
 const Nav = styled.nav`
   display: flex;
-  align-items: center;
   margin-right: auto;
-`;
-
-const LinkStyled = styled(NavLink)`
-  display: flex;
-  align-items: center;
-  margin-right: 25px;
-  text-decoration: none;
-
-  &:last-child {
-    margin-right: 0;
-  }
 `;
 
 const Icon = styled.img`
@@ -35,10 +24,27 @@ const Text = styled.span`
   color: #667580;
 `;
 
+const LinkStyled = styled(NavLink)`
+  display: flex;
+  align-items: center;
+  margin-right: 25px;
+  text-decoration: none;
+
+  &:last-child {
+    margin-right: 0;
+  }
+  &:hover ${Text} {
+    color: #1da1f2;
+  }
+  &.active ${Text} {
+    color: #1da1f2;
+  }
+`;
+
 const MainNav = () => {
   return (
     <Nav>
-      <LinkStyled to="/home">
+      <LinkStyled to="/">
         <Icon src={IconHome} alt="Home" />
         <Text>Home</Text>
       </LinkStyled>
