@@ -86,6 +86,9 @@ const Button = styled.button`
   color: #1da1f2;
   text-align: center;
   cursor: pointer;
+  &:hover {
+    background-color: #e8f5fd;
+  }
 `;
 
 const BtnMore = styled.button`

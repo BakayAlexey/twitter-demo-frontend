@@ -25,6 +25,7 @@ const LinkStyled = styled(NavLink)`
   }
   &.active {
     color: #292f33;
+    text-decoration: none;
   }
 `;
 
@@ -42,7 +43,7 @@ function Tweets() {
   return (
     <Wrapper>
       <Nav>
-        <LinkStyled to="/tweets">Tweets</LinkStyled>
+        <LinkStyled to="/">Tweets</LinkStyled>
         <LinkStyled to="/tweets_replies">Tweets & replies</LinkStyled>
         <LinkStyled to="/media">Media</LinkStyled>
       </Nav>
@@ -73,7 +74,6 @@ function Tweets() {
           envelope={0}
         />
         <Tweet
-          pinned={true}
           avatar={process.env.PUBLIC_URL + "/img/avatar_small.png"}
           author="Every Interaction"
           authorName="@EveryInteract"

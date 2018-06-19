@@ -50,6 +50,9 @@ const ButtonTweet = styled.button`
   color: #ffffff;
   text-align: center;
   cursor: pointer;
+  &:hover {
+    background-color: #4ab3f4;
+  }
 `;
 
 function Header() {

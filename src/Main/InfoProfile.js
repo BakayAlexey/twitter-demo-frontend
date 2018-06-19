@@ -147,6 +147,9 @@ const Button = styled.button`
   &:nth-child(2n) {
     margin-right: 0;
   }
+  &:hover {
+    background-color: #4ab3f4;
+  }
 `;
 
 const InfoProfile = () => {
