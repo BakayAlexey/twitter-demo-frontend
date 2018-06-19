@@ -66,7 +66,7 @@ const Author = styled.div`
   vertical-align: baseline;
   margin-right: 5px;
   font-size: 15px;
-  font-weight: normal;
+  font-weight: bold;
   line-height: 21px;
   color: #292f33;
   text-decoration: none;
@@ -77,7 +77,7 @@ const AuthorName = styled.div`
   vertical-align: baseline;
   margin-right: 5px;
   font-size: 12px;
-  font-weight: normal;
+  font-weight: 500;
   line-height: 21px;
   color: #707e88;
   text-decoration: none;
