@@ -15,8 +15,8 @@ const Head = styled.div`
 
 const Icon = styled.img`
   display: block;
-  width: 12px;
-  height: 15px;
+  width: 13px;
+  height: 16px;
   margin-right: 12px;
 `;
 
