@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { Route, NavLink } from "react-router-dom";
-import IconHome from "./IconHome.svg";
-import IconMoments from "./IconMoments.svg";
-import IconNotifications from "./IconNotifications.svg";
-import IconMessages from "./IconMessages.svg";
+import iconHome from "./IconHome.svg";
+import iconMoments from "./IconMoments.svg";
+import iconNotifications from "./IconNotifications.svg";
+import iconMessages from "./IconMessages.svg";
 import ProfilePage from "../ProfilePage";
 
 const Nav = styled.nav`
@@ -45,19 +45,19 @@ const MainNav = () => {
   return (
     <Nav>
       <LinkStyled to="/">
-        <Icon src={IconHome} alt="Home" />
+        <Icon src={iconHome} alt="Home" />
         <Text>Home</Text>
       </LinkStyled>
       <LinkStyled to="/moments">
-        <Icon src={IconMoments} alt="Moments" />
+        <Icon src={iconMoments} alt="Moments" />
         <Text>Moments</Text>
       </LinkStyled>
       <LinkStyled to="/notifications">
-        <Icon src={IconNotifications} alt="Notifications" />
+        <Icon src={iconNotifications} alt="Notifications" />
         <Text>Notifications</Text>
       </LinkStyled>
       <LinkStyled to="/messages">
-        <Icon src={IconMessages} alt="Messages" />
+        <Icon src={iconMessages} alt="Messages" />
         <Text>Messages</Text>
       </LinkStyled>
     </Nav>

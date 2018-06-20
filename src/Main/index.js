@@ -1,6 +1,8 @@
 import React from "react";
 import Bar from "./Bar";
 import InfoProfile from "./InfoProfile";
+import Followers from "./Followers";
+import Gallery from "./Gallery";
 import Tweets from "./Tweets";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import styled from "styled-components";
@@ -32,6 +34,8 @@ function Main() {
           <Row>
             <Col md={3}>
               <InfoProfile />
+              <Followers />
+              <Gallery />
             </Col>
             <Col md={6}>
               <Tweets />

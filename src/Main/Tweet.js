@@ -1,9 +1,9 @@
 import React from "react";
-import iconPinned from "./IconPinned.svg";
-import iconLoves from "./IconLoves.svg";
-import iconComments from "./IconComments.svg";
-import iconEnvelope from "./IconEnvelope.svg";
-import iconRetweet from "./IconRetweet.svg";
+import iconPinned from "./icons/IconPinned.svg";
+import iconLoves from "./icons/IconLoves.svg";
+import iconComments from "./icons/IconComments.svg";
+import iconEnvelope from "./icons/IconEnvelope.svg";
+import iconRetweet from "./icons/IconRetweet.svg";
 import styled from "styled-components";
 
 const Wrapper = styled.div`

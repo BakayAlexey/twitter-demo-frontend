@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
-import tick from "./Tick.svg";
-import iconLocation from "./IconLocation.svg";
-import iconLink from "./IconLink.svg";
-import iconJoined from "./IconJoined.svg";
+import React from "react";
+import tick from "./icons/Tick.svg";
+import iconLocation from "./icons/IconLocation.svg";
+import iconLink from "./icons/IconLink.svg";
+import iconJoined from "./icons/IconJoined.svg";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
