@@ -36,33 +36,6 @@ const LinkStyled = styled(NavLink)`
   }
 `;
 
-const Statistics = () => {
-  return (
-    <Nav>
-      <LinkStyled to="/tweets">
-        <Name>Tweets</Name>
-        <Amount>8,058</Amount>
-      </LinkStyled>
-      <LinkStyled to="/following">
-        <Name>Following</Name>
-        <Amount>721</Amount>
-      </LinkStyled>
-      <LinkStyled to="/followers">
-        <Name>Followers</Name>
-        <Amount>1,815</Amount>
-      </LinkStyled>
-      <LinkStyled to="/likes">
-        <Name>Likes</Name>
-        <Amount>460</Amount>
-      </LinkStyled>
-      <LinkStyled to="/lists">
-        <Name>Lists</Name>
-        <Amount>2</Amount>
-      </LinkStyled>
-    </Nav>
-  );
-};
-
 const BarStyled = styled.div`
   position: relative;
   box-shadow: 0 2px 2px 0 #b0b8be;
@@ -132,6 +105,33 @@ const IconMore = styled.div`
     transform: translate(0, 5px);
   }
 `;
+
+const Statistics = () => {
+  return (
+    <Nav>
+      <LinkStyled to="/tweets">
+        <Name>Tweets</Name>
+        <Amount>8,058</Amount>
+      </LinkStyled>
+      <LinkStyled to="/following">
+        <Name>Following</Name>
+        <Amount>721</Amount>
+      </LinkStyled>
+      <LinkStyled to="/followers">
+        <Name>Followers</Name>
+        <Amount>1,815</Amount>
+      </LinkStyled>
+      <LinkStyled to="/likes">
+        <Name>Likes</Name>
+        <Amount>460</Amount>
+      </LinkStyled>
+      <LinkStyled to="/lists">
+        <Name>Lists</Name>
+        <Amount>2</Amount>
+      </LinkStyled>
+    </Nav>
+  );
+};
 
 const Bar = () => {
   return (
