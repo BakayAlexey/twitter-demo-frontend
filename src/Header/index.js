@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "react-flexbox-grid";
 import MainNav from "./MainNav";
 import SearchForm from "./SearchForm";
-import IconLogo from "./TwitterLogo.svg";
+import IconLogo from "./twitter-logo.svg";
 import styled from "styled-components";
 
 const HeaderContent = styled.div`
@@ -18,11 +18,11 @@ const Logo = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 21px;
+`;
 
-  img {
-    display: block;
-    width: 100%;
-  }
+const Img = styled.img`
+  display: block;
+  width: 100%;
 `;
 
 const Avatar = styled.div`
@@ -31,10 +31,6 @@ const Avatar = styled.div`
   margin: 0 18px;
   border-radius: 50%;
   overflow: hidden;
-  img {
-    display: block;
-    width: 100%;
-  }
 `;
 
 const ButtonTweet = styled.button`
@@ -62,11 +58,11 @@ function Header() {
         <HeaderContent>
           <MainNav />
           <Logo>
-            <img src={IconLogo} alt="Logo" />
+            <Img src={IconLogo} alt="Logo" />
           </Logo>
           <SearchForm />
           <Avatar>
-            <img
+            <Img
               src={process.env.PUBLIC_URL + "/img/avatar_small.png"}
               alt="Avatar"
             />

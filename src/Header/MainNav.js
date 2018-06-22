@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { Route, NavLink } from "react-router-dom";
-import iconHome from "./IconHome.svg";
-import iconMoments from "./IconMoments.svg";
-import iconNotifications from "./IconNotifications.svg";
-import iconMessages from "./IconMessages.svg";
-import ProfilePage from "../ProfilePage";
+import { NavLink } from "react-router-dom";
+import iconHome from "./icon-home.svg";
+import iconMoments from "./icon-moments.svg";
+import iconNotifications from "./icon-notifications.svg";
+import iconMessages from "./icon-messages.svg";
 
 const Nav = styled.nav`
   display: flex;

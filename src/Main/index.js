@@ -4,6 +4,9 @@ import InfoProfile from "./InfoProfile";
 import Followers from "./Followers";
 import Gallery from "./Gallery";
 import Tweets from "./Tweets";
+import Follows from "./Follows";
+import Trends from "./Trends";
+import Support from "./Support";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import styled from "styled-components";
 
@@ -39,6 +42,11 @@ function Main() {
             </Col>
             <Col md={6}>
               <Tweets />
+            </Col>
+            <Col md={3}>
+              <Follows />
+              <Trends />
+              <Support />
             </Col>
           </Row>
         </Grid>

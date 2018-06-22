@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import iconGallery from "./icons/IconGallery.svg";
+import iconGallery from "./icons/icon-gallery.svg";
 
-const Wrapper = styled.div`
+const StGallery = styled.div`
   padding: 15px 0;
 `;
 
@@ -45,23 +45,24 @@ const StGalleryElem = styled(Link)`
   &:nth-child(3n) {
     margin-right: 0;
   }
-  img {
-    display: block;
-    width: 100%;
-  }
+`;
+
+const Img = styled.img`
+  display: block;
+  width: 100%;
 `;
 
 function GalleryElem(props) {
   return (
     <StGalleryElem to={props.to}>
-      <img src={props.img} alt={props.descr} />
+      <Img src={props.img} alt={props.descr} />
     </StGalleryElem>
   );
 }
 
 function Gallery() {
   return (
-    <Wrapper>
+    <StGallery>
       <Head>
         <Icon src={iconGallery} alt="photos and videos" />
         <Title to="/gallery">522 Photos and videos</Title>
@@ -99,7 +100,7 @@ function Gallery() {
           descr="GalleryElemDescr"
         />
       </GalleryList>
-    </Wrapper>
+    </StGallery>
   );
 }
 

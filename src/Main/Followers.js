@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import iconFollowers from "./icons/IconFollowers.svg";
+import iconFollowers from "./icons/icon-followers.svg";
 
-const Wrapper = styled.div`
+const StFollowers = styled.div`
   padding: 15px 0;
 `;
 
@@ -43,23 +43,24 @@ const StFollower = styled(Link)`
   &:nth-child(5n) {
     margin-right: 0;
   }
-  img {
-    display: block;
-    width: 100%;
-  }
+`;
+
+const Img = styled.img`
+  display: block;
+  width: 100%;
 `;
 
 function Follower(props) {
   return (
     <StFollower to={props.to}>
-      <img src={props.img} alt={props.descr} />
+      <Img src={props.img} alt={props.descr} />
     </StFollower>
   );
 }
 
 function Followers() {
   return (
-    <Wrapper>
+    <StFollowers>
       <Head>
         <Icon src={iconFollowers} alt="followers" />
         <Title to="/followers">6 Followers you know</Title>
@@ -97,7 +98,7 @@ function Followers() {
           descr="followerDescr"
         />
       </FollowersList>
-    </Wrapper>
+    </StFollowers>
   );
 }
 

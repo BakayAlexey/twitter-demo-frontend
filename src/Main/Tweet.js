@@ -1,16 +1,16 @@
 import React from "react";
-import iconPinned from "./icons/IconPinned.svg";
-import iconLoves from "./icons/IconLoves.svg";
-import iconComments from "./icons/IconComments.svg";
-import iconEnvelope from "./icons/IconEnvelope.svg";
-import iconRetweet from "./icons/IconRetweet.svg";
+import iconPinned from "./icons/icon-pinned.svg";
+import iconLoves from "./icons/icon-loves.svg";
+import iconComments from "./icons/icon-comments.svg";
+import iconEnvelope from "./icons/icon-envelope.svg";
+import iconRetweet from "./icons/icon-retweet.svg";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const StTweet = styled.div`
   border-bottom: 1px solid #e1e8ed;
 `;
 
-const PinnedWrapper = styled.div`
+const StPinned = styled.div`
   position: relative;
   padding: 5px 10px 5px 70px;
 `;
@@ -32,15 +32,6 @@ const PinnedDescr = styled.span`
   color: #707e88;
 `;
 
-function Pinned() {
-  return (
-    <PinnedWrapper>
-      <PinnedIcon src={iconPinned} />
-      <PinnedDescr>Pinned Tweet</PinnedDescr>
-    </PinnedWrapper>
-  );
-}
-
 const Body = styled.div`
   position: relative;
   padding: 5px 10px 5px 70px;
@@ -54,11 +45,11 @@ const Avatar = styled.div`
   height: 41px;
   border-radius: 50%;
   overflow: hidden;
+`;
 
-  img {
-    display: block;
-    width: 100%;
-  }
+const Img = styled.img`
+  display: block;
+  width: 100%;
 `;
 
 const Author = styled.div`
@@ -201,13 +192,22 @@ const ActionValue = styled.div`
   color: #667580;
 `;
 
+function Pinned() {
+  return (
+    <StPinned>
+      <PinnedIcon src={iconPinned} />
+      <PinnedDescr>Pinned Tweet</PinnedDescr>
+    </StPinned>
+  );
+}
+
 function Tweet(props) {
   return (
-    <Wrapper>
+    <StTweet>
       {props.pinned && <Pinned />}
       <Body>
         <Avatar>
-          <img src={props.avatar} alt="avatar" />
+          <Img src={props.avatar} alt="avatar" />
         </Avatar>
 
         <div>
@@ -260,7 +260,7 @@ function Tweet(props) {
           </Action>
         </ActionList>
       </Body>
-    </Wrapper>
+    </StTweet>
   );
 }
 

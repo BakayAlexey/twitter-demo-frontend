@@ -1,15 +1,16 @@
 import React from "react";
-import tick from "./icons/Tick.svg";
-import iconLocation from "./icons/IconLocation.svg";
-import iconLink from "./icons/IconLink.svg";
-import iconJoined from "./icons/IconJoined.svg";
+import tick from "./icons/tick.svg";
+import iconLocation from "./icons/icon-location.svg";
+import iconLink from "./icons/icon-link.svg";
+import iconJoined from "./icons/icon-joined.svg";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-const Wrapper = styled.div`
+const StInfoProfile = styled.div`
   padding: 30px 0;
 `;
 
-const Avatar = styled.div`
+const AvatarWrap = styled.div`
   box-sizing: border-box;
   position: relative;
   width: 207px;
@@ -20,11 +21,11 @@ const Avatar = styled.div`
   border: 1px solid #e7ecf0;
   border-radius: 50%;
   overflow: hidden;
+`;
 
-  img {
-    display: block;
-    width: 100%;
-  }
+const Avatar = styled.img`
+  display: block;
+  width: 100%;
 `;
 
 const Name = styled.div`
@@ -44,7 +45,7 @@ const Verified = styled.img`
   height: 18px;
 `;
 
-const NameLink = styled.a`
+const NameLink = styled(Link)`
   display: inline-block;
   vertical-align: baseline;
   margin-right: 7px;
@@ -52,15 +53,23 @@ const NameLink = styled.a`
   line-height: 21px;
   font-weight: normal;
   color: #697787;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
-const Follows = styled.a`
+const Follows = styled(Link)`
   display: inline-block;
   vertical-align: baseline;
   font-size: 12px;
   line-height: 12px;
   font-weight: normal;
   color: #697787;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Description = styled.p`
@@ -73,11 +82,6 @@ const Location = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 12px;
-
-  img {
-    display: block;
-    margin-right: 10px;
-  }
   span {
     font-size: 14px;
     line-height: 20px;
@@ -86,15 +90,16 @@ const Location = styled.div`
   }
 `;
 
+const Img = styled.img`
+  display: block;
+  margin-right: 10px;
+`;
+
 const LinkSite = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 12px;
 
-  img {
-    display: block;
-    margin-right: 10px;
-  }
   a {
     font-size: 14px;
     line-height: 20px;
@@ -112,10 +117,6 @@ const Joined = styled.div`
   align-items: center;
   margin-bottom: 12px;
 
-  img {
-    display: block;
-    margin-right: 10px;
-  }
   span {
     font-size: 14px;
     line-height: 20px;
@@ -154,42 +155,42 @@ const Button = styled.button`
 
 const InfoProfile = () => {
   return (
-    <Wrapper>
-      <Avatar>
-        <img
+    <StInfoProfile>
+      <AvatarWrap>
+        <Avatar
           src={process.env.PUBLIC_URL + "/img/avatar_big.png"}
           alt="profile_image"
         />
-      </Avatar>
+      </AvatarWrap>
       <div>
         <Name>Every Interaction</Name>
         <Verified src={tick} alt="verified" />
       </div>
       <div>
-        <NameLink>@EveryInteract</NameLink>
-        <Follows>Follows you</Follows>
+        <NameLink to="EveryInteract">@EveryInteract</NameLink>
+        <Follows to="/followers">Follows you</Follows>
       </div>
       <Description>
         UX Design studio focussed problem solving creativity. Design to us is
         how can we make things *work* amazing.
       </Description>
       <Location>
-        <img src={iconLocation} alt="location" />
+        <Img src={iconLocation} alt="location" />
         <span>London, UK </span>
       </Location>
       <LinkSite>
-        <img src={iconLink} alt="link site" />
+        <Img src={iconLink} alt="link site" />
         <a href="everyinteraction.com">everyinteraction.com</a>
       </LinkSite>
       <Joined>
-        <img src={iconJoined} alt="joined" />
+        <Img src={iconJoined} alt="joined" />
         <span>Joined May 2008</span>
       </Joined>
       <BtnGroup>
         <Button>Tweet to</Button>
         <Button>Message</Button>
       </BtnGroup>
-    </Wrapper>
+    </StInfoProfile>
   );
 };
 

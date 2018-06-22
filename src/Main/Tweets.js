@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import Tweet from "./Tweet";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const StTweets = styled.div`
   background-color: #ffffff;
 `;
 
@@ -41,7 +41,7 @@ function Tweets() {
   };
 
   return (
-    <Wrapper>
+    <StTweets>
       <Nav>
         <LinkStyled to="/">Tweets</LinkStyled>
         <LinkStyled to="/tweets_replies">Tweets & replies</LinkStyled>
@@ -87,7 +87,7 @@ function Tweets() {
           envelope={0}
         />
       </List>
-    </Wrapper>
+    </StTweets>
   );
 }
 
