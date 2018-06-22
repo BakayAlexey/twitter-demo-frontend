@@ -71,32 +71,32 @@ function Gallery() {
       <GalleryList>
         <GalleryElem
           to="/galleryElem"
-          img={process.env.PUBLIC_URL + "/img/Gallery1.jpg"}
+          img={process.env.PUBLIC_URL + "/img/gallery1.jpg"}
           descr="GalleryElemDescr"
         />
         <GalleryElem
           to="/galleryElem"
-          img={process.env.PUBLIC_URL + "/img/Gallery2.jpg"}
+          img={process.env.PUBLIC_URL + "/img/gallery2.jpg"}
           descr="GalleryElemDescr"
         />
         <GalleryElem
           to="/galleryElem"
-          img={process.env.PUBLIC_URL + "/img/Gallery3.jpg"}
+          img={process.env.PUBLIC_URL + "/img/gallery3.jpg"}
           descr="GalleryElemDescr"
         />
         <GalleryElem
           to="/galleryElem"
-          img={process.env.PUBLIC_URL + "/img/Gallery4.jpg"}
+          img={process.env.PUBLIC_URL + "/img/gallery4.jpg"}
           descr="GalleryElemDescr"
         />
         <GalleryElem
           to="/galleryElem"
-          img={process.env.PUBLIC_URL + "/img/Gallery5.jpg"}
+          img={process.env.PUBLIC_URL + "/img/gallery5.jpg"}
           descr="GalleryElemDescr"
         />
         <GalleryElem
           to="/galleryElem"
-          img={process.env.PUBLIC_URL + "/img/Gallery6.jpg"}
+          img={process.env.PUBLIC_URL + "/img/gallery6.jpg"}
           descr="GalleryElemDescr"
         />
       </GalleryList>

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import IconMagnifier from "./icon-magnifier.svg";
+import iconMagnifier from "./icon-magnifier.svg";
 
 const Input = styled.input`
   box-sizing: border-box;
@@ -49,7 +49,7 @@ function SearchForm() {
     <Form>
       <Input type="text" placeholder="Search Twitter" />
       <Button type="submit">
-        <Img src={IconMagnifier} alt="btn-search" />
+        <Img src={iconMagnifier} alt="btn-search" />
       </Button>
     </Form>
   );

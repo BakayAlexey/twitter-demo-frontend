@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "react-flexbox-grid";
 import MainNav from "./MainNav";
 import SearchForm from "./SearchForm";
-import IconLogo from "./twitter-logo.svg";
+import iconLogo from "./twitter-logo.svg";
 import styled from "styled-components";
 
 const HeaderContent = styled.div`
@@ -58,12 +58,12 @@ function Header() {
         <HeaderContent>
           <MainNav />
           <Logo>
-            <Img src={IconLogo} alt="Logo" />
+            <Img src={iconLogo} alt="Logo" />
           </Logo>
           <SearchForm />
           <Avatar>
             <Img
-              src={process.env.PUBLIC_URL + "/img/avatar_small.png"}
+              src={process.env.PUBLIC_URL + "/img/avatar-small.png"}
               alt="Avatar"
             />
           </Avatar>

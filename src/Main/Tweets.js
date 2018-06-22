@@ -33,7 +33,7 @@ const List = styled.div``;
 
 function Tweets() {
   const article = {
-    img: process.env.PUBLIC_URL + "/img/TweetArticle.jpg",
+    img: process.env.PUBLIC_URL + "/img/tweet-article.jpg",
     title: "The Future of Web Fonts",
     text:
       "We love typefaces. They give our sites and applications personalized feel. They convey the information and tell a story. They establish information hierarchy. But they’re…",
@@ -44,29 +44,29 @@ function Tweets() {
     <StTweets>
       <Nav>
         <LinkStyled to="/">Tweets</LinkStyled>
-        <LinkStyled to="/tweets_replies">Tweets & replies</LinkStyled>
+        <LinkStyled to="/tweets_replies">Tweets &amp; replies</LinkStyled>
         <LinkStyled to="/media">Media</LinkStyled>
       </Nav>
       <List>
         <Tweet
           pinned={true}
-          avatar={process.env.PUBLIC_URL + "/img/avatar_small.png"}
+          avatar={process.env.PUBLIC_URL + "/img/avatar-small.png"}
           author="Every Interaction"
           authorName="@EveryInteract"
           date="2 Mar 2015"
           bigText="We’ve made some more resources for all you wonderful #design folk everyinteraction.com/resources/ #webdesign #UI"
-          image={process.env.PUBLIC_URL + "/img/tweetImg.jpg"}
+          image={process.env.PUBLIC_URL + "/img/tweet-img.jpg"}
           comments={0}
           retweet={17}
           loves={47}
           envelope={0}
         />
         <Tweet
-          avatar={process.env.PUBLIC_URL + "/img/avatar_small.png"}
+          avatar={process.env.PUBLIC_URL + "/img/avatar-small.png"}
           author="Every Interaction"
           authorName="@EveryInteract"
           date="23h"
-          srcImg={process.env.PUBLIC_URL + "/img/tweetImg.jpg"}
+          srcImg={process.env.PUBLIC_URL + "/img/tweet-img.jpg"}
           bigText="Our new website concept; Taking you from… @ Every Interaction instagram.com/p/BNFGrfhBP3M/"
           comments={1}
           retweet={4}
@@ -74,11 +74,11 @@ function Tweets() {
           envelope={0}
         />
         <Tweet
-          avatar={process.env.PUBLIC_URL + "/img/avatar_small.png"}
+          avatar={process.env.PUBLIC_URL + "/img/avatar-small.png"}
           author="Every Interaction"
           authorName="@EveryInteract"
           date="Nov 18"
-          srcImg={process.env.PUBLIC_URL + "/img/tweetImg.jpg"}
+          srcImg={process.env.PUBLIC_URL + "/img/tweet-img.jpg"}
           text="Variable web fonts are coming, and will open a world of opportunities for weight use online"
           article={article}
           comments={0}

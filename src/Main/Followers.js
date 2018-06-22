@@ -69,32 +69,32 @@ function Followers() {
       <FollowersList>
         <Follower
           to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/Followers1.jpg"}
+          img={process.env.PUBLIC_URL + "/img/followers1.jpg"}
           descr="followerDescr"
         />
         <Follower
           to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/Followers2.jpg"}
+          img={process.env.PUBLIC_URL + "/img/followers2.jpg"}
           descr="followerDescr"
         />
         <Follower
           to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/Followers3.jpg"}
+          img={process.env.PUBLIC_URL + "/img/followers3.jpg"}
           descr="followerDescr"
         />
         <Follower
           to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/Followers4.jpg"}
+          img={process.env.PUBLIC_URL + "/img/followers4.jpg"}
           descr="followerDescr"
         />
         <Follower
           to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/Followers5.jpg"}
+          img={process.env.PUBLIC_URL + "/img/followers5.jpg"}
           descr="followerDescr"
         />
         <Follower
           to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/Followers6.jpg"}
+          img={process.env.PUBLIC_URL + "/img/followers6.jpg"}
           descr="followerDescr"
         />
       </FollowersList>

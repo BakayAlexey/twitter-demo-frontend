@@ -217,7 +217,7 @@ function FollowUser(props) {
       <UserData>
         <Name>{props.name}</Name>
         {props.verified && <Verified src={tick} alt="verified" />}
-        <NameLink to={"str" + props.nameLink}>{props.nameLink}</NameLink>
+        <NameLink to={"/" + props.nameLink}>{props.nameLink}</NameLink>
       </UserData>
       <Button>Follow</Button>
     </StFollowUser>
@@ -234,21 +234,21 @@ function Follows() {
       </Head>
       <FollowsList>
         <FollowUser
-          img={process.env.PUBLIC_URL + "/img/Follow1.jpg"}
+          img={process.env.PUBLIC_URL + "/img/follow1.jpg"}
           imgDescr="img descr"
           verified={false}
           name="AppleInsider"
           nameLink="@appleinsider"
         />
         <FollowUser
-          img={process.env.PUBLIC_URL + "/img/Follow2.jpg"}
+          img={process.env.PUBLIC_URL + "/img/follow2.jpg"}
           imgDescr="img descr"
           verified={true}
           name="Creode"
           nameLink="@Creode"
         />
         <FollowUser
-          img={process.env.PUBLIC_URL + "/img/Follow3.jpg"}
+          img={process.env.PUBLIC_URL + "/img/follow3.jpg"}
           imgDescr="img descr"
           verified={false}
           name="Epiphany Search"

@@ -28,7 +28,7 @@ function Main() {
   return (
     <main>
       <ProfileImg
-        src={process.env.PUBLIC_URL + "/img/Profile_image.jpg"}
+        src={process.env.PUBLIC_URL + "/img/profile-image.jpg"}
         alt="profile_image"
       />
       <Bar />

@@ -158,7 +158,7 @@ const InfoProfile = () => {
     <StInfoProfile>
       <AvatarWrap>
         <Avatar
-          src={process.env.PUBLIC_URL + "/img/avatar_big.png"}
+          src={process.env.PUBLIC_URL + "/img/avatar-big.png"}
           alt="profile_image"
         />
       </AvatarWrap>
