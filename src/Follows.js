@@ -24,7 +24,6 @@ const Title = styled.div`
 `;
 
 const Small = styled.span`
-  content: "·";
   display: inline-block;
   margin: 0 5px;
   font-size: 12px;
