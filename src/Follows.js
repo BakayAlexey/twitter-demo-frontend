@@ -23,10 +23,19 @@ const Title = styled.div`
   color: #292f33;
 `;
 
+const Small = styled.span`
+  content: "·";
+  display: inline-block;
+  margin: 0 5px;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: normal;
+  color: #1da1f2;
+`;
+
 const BtnRefresh = styled.button`
   position: relative;
-  margin-left: 7px;
-  padding: 0 0 0 7px;
+  padding: 0;
   border: none;
   background: none;
   font-size: 12px;
@@ -37,23 +46,10 @@ const BtnRefresh = styled.button`
   &:hover {
     text-decoration: underline;
   }
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 2px;
-    height: 2px;
-    background-color: #66757f;
-    border-radius: 50%;
-  }
 `;
 
 const LinkViewAll = styled(Link)`
   position: relative;
-  margin-left: 7px;
-  padding-left: 7px;
   font-size: 12px;
   line-height: 14px;
   font-weight: normal;
@@ -61,17 +57,6 @@ const LinkViewAll = styled(Link)`
   text-decoration: none;
   &:hover {
     text-decoration: underline;
-  }
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 2px;
-    height: 2px;
-    background-color: #66757f;
-    border-radius: 50%;
   }
 `;
 
@@ -229,7 +214,9 @@ function Follows() {
     <StFollows>
       <Head>
         <Title to="/followers">Who to follow</Title>
+        <Small>·</Small>
         <BtnRefresh>Refresh</BtnRefresh>
+        <Small>·</Small>
         <LinkViewAll to="/viewAll">View all</LinkViewAll>
       </Head>
       <FollowsList>

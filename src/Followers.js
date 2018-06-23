@@ -34,15 +34,14 @@ const Title = styled(Link)`
 const FollowersList = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin: 0 -2px;
 `;
 
 const StFollower = styled(Link)`
-  width: calc((100% - 20px) / 5);
-  margin-right: 5px;
-  margin-bottom: 5px;
-  &:nth-child(5n) {
-    margin-right: 0;
-  }
+  box-sizing: border-box;
+  width: 20%;
+  margin-bottom: 4px;
+  padding: 0 2px;
 `;
 
 const Img = styled.img`
@@ -53,7 +52,7 @@ const Img = styled.img`
 function Follower(props) {
   return (
     <StFollower to={props.to}>
-      <Img src={props.img} alt={props.descr} />
+      <Img src={props.img} alt={props.description} />
     </StFollower>
   );
 }
@@ -70,32 +69,32 @@ function Followers() {
         <Follower
           to="/followerProfile"
           img={process.env.PUBLIC_URL + "/img/followers1.jpg"}
-          descr="followerDescr"
+          description="followerDescr"
         />
         <Follower
           to="/followerProfile"
           img={process.env.PUBLIC_URL + "/img/followers2.jpg"}
-          descr="followerDescr"
+          description="followerDescr"
         />
         <Follower
           to="/followerProfile"
           img={process.env.PUBLIC_URL + "/img/followers3.jpg"}
-          descr="followerDescr"
+          description="followerDescr"
         />
         <Follower
           to="/followerProfile"
           img={process.env.PUBLIC_URL + "/img/followers4.jpg"}
-          descr="followerDescr"
+          description="followerDescr"
         />
         <Follower
           to="/followerProfile"
           img={process.env.PUBLIC_URL + "/img/followers5.jpg"}
-          descr="followerDescr"
+          description="followerDescr"
         />
         <Follower
           to="/followerProfile"
           img={process.env.PUBLIC_URL + "/img/followers6.jpg"}
-          descr="followerDescr"
+          description="followerDescr"
         />
       </FollowersList>
     </StFollowers>

@@ -23,11 +23,19 @@ const Title = styled.div`
   letter-spacing: -0.5px;
 `;
 
+const Small = styled.span`
+  content: "·";
+  display: inline-block;
+  margin: 0 5px;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: normal;
+  color: #1da1f2;
+`;
+
 const Change = styled(Link)`
   position: relative;
   display: inline-block;
-  margin-left: 6px;
-  padding: 0 0 0 6px;
   text-decoration: none;
   font-size: 12px;
   font-weight: normal;
@@ -35,17 +43,6 @@ const Change = styled(Link)`
   text-decoration: none;
   &:hover {
     text-decoration: underline;
-  }
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 2px;
-    height: 2px;
-    background-color: #66757f;
-    border-radius: 50%;
   }
 `;
 
@@ -76,11 +73,32 @@ const Stats = styled.div`
   color: #718290;
 `;
 
+const Description = styled.div`
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: normal;
+  color: #718290;
+`;
+
 function Trend(props) {
+  const { name, stats, description } = props;
+  const statsDescr = () => {
+    if (stats > 10000) {
+      return (stats / 1000).toFixed(1) + "K Tweets";
+    } else if (stats => 1000) {
+      return (stats / 1000).toFixed(3).replace(".", ",") + " Tweets";
+    } else if (stats === 1) {
+      return "1 Tweet";
+    } else {
+      return stats + " Tweet";
+    }
+  };
+
   return (
     <StTrend>
-      <Name to={"/search?q=" + props.name}>{props.name}</Name>
-      {props.stats && <Stats>{props.stats}</Stats>}
+      <Name to={"/search?q=" + name}>{name}</Name>
+      {stats && <Stats>{statsDescr()}</Stats>}
+      {description && <Description>{description}</Description>}
     </StTrend>
   );
 }
@@ -90,18 +108,19 @@ function Trends() {
     <StTrends>
       <Head>
         <Title>United Kingdom Trends</Title>
+        <Small>·</Small>
         <Change to="/change">Change</Change>
       </Head>
       <TrendsList>
         <Trend name="#BringYourDogToWorkDay" />
-        <Trend name="#FridayFeeling" stats="12.1K Tweets" />
+        <Trend name="#FridayFeeling" stats={12121} />
         <Trend
           name="#BrexitAnniversary"
-          stats="It’s one year since the UK voted to leave the European Union"
+          description="It’s one year since the UK voted to leave the European Union"
         />
-        <Trend name="HMS Queen Elizabeth" stats="1,036 Tweets" />
-        <Trend name="Joe Budden" stats="1,036 Tweets" />
-        <Trend name="Trident" stats="6,136 Tweets" />
+        <Trend name="HMS Queen Elizabeth" stats={1036} />
+        <Trend name="Joe Budden" stats={1036} />
+        <Trend name="Trident" stats={6136} />
       </TrendsList>
     </StTrends>
   );

@@ -15,7 +15,7 @@ const Amount = styled.div`
   color: #707e88;
 `;
 
-const LinkStyled = styled(NavLink)`
+const StLink = styled(NavLink)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,26 +109,26 @@ const IconMore = styled.div`
 const Statistics = () => {
   return (
     <Nav>
-      <LinkStyled to="/tweets">
+      <StLink to="/tweets">
         <Name>Tweets</Name>
         <Amount>8,058</Amount>
-      </LinkStyled>
-      <LinkStyled to="/following">
+      </StLink>
+      <StLink to="/following">
         <Name>Following</Name>
         <Amount>721</Amount>
-      </LinkStyled>
-      <LinkStyled to="/followers">
+      </StLink>
+      <StLink to="/followers">
         <Name>Followers</Name>
         <Amount>1,815</Amount>
-      </LinkStyled>
-      <LinkStyled to="/likes">
+      </StLink>
+      <StLink to="/likes">
         <Name>Likes</Name>
         <Amount>460</Amount>
-      </LinkStyled>
-      <LinkStyled to="/lists">
+      </StLink>
+      <StLink to="/lists">
         <Name>Lists</Name>
         <Amount>2</Amount>
-      </LinkStyled>
+      </StLink>
     </Nav>
   );
 };

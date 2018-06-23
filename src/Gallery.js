@@ -34,17 +34,15 @@ const Title = styled(Link)`
 const GalleryList = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin: 0 -2px;
 `;
 
-const StGalleryElem = styled(Link)`
-  width: calc((100% - 10px) / 3);
-  margin-right: 5px;
-  margin-bottom: 5px;
-  border-radius: 2px;
+const StGalleryLink = styled(Link)`
+  box-sizing: border-box;
+  width: 33.33%;
+  margin-bottom: 4px;
+  padding: 0 2px;
   overflow: hidden;
-  &:nth-child(3n) {
-    margin-right: 0;
-  }
 `;
 
 const Img = styled.img`
@@ -52,11 +50,11 @@ const Img = styled.img`
   width: 100%;
 `;
 
-function GalleryElem(props) {
+function GalleryLink(props) {
   return (
-    <StGalleryElem to={props.to}>
+    <StGalleryLink to={props.to}>
       <Img src={props.img} alt={props.descr} />
-    </StGalleryElem>
+    </StGalleryLink>
   );
 }
 
@@ -69,32 +67,32 @@ function Gallery() {
       </Head>
 
       <GalleryList>
-        <GalleryElem
+        <GalleryLink
           to="/galleryElem"
           img={process.env.PUBLIC_URL + "/img/gallery1.jpg"}
           descr="GalleryElemDescr"
         />
-        <GalleryElem
+        <GalleryLink
           to="/galleryElem"
           img={process.env.PUBLIC_URL + "/img/gallery2.jpg"}
           descr="GalleryElemDescr"
         />
-        <GalleryElem
+        <GalleryLink
           to="/galleryElem"
           img={process.env.PUBLIC_URL + "/img/gallery3.jpg"}
           descr="GalleryElemDescr"
         />
-        <GalleryElem
+        <GalleryLink
           to="/galleryElem"
           img={process.env.PUBLIC_URL + "/img/gallery4.jpg"}
           descr="GalleryElemDescr"
         />
-        <GalleryElem
+        <GalleryLink
           to="/galleryElem"
           img={process.env.PUBLIC_URL + "/img/gallery5.jpg"}
           descr="GalleryElemDescr"
         />
-        <GalleryElem
+        <GalleryLink
           to="/galleryElem"
           img={process.env.PUBLIC_URL + "/img/gallery6.jpg"}
           descr="GalleryElemDescr"
