@@ -81,7 +81,7 @@ const Description = styled.div`
 
 function Trend(props) {
   const { name, stats, description } = props;
-  const statsDescr = () => {
+  const getStatsDescr = () => {
     if (stats > 10000) {
       return (stats / 1000).toFixed(1) + "K Tweets";
     } else if (stats => 1000) {
@@ -89,14 +89,14 @@ function Trend(props) {
     } else if (stats === 1) {
       return "1 Tweet";
     } else {
-      return stats + " Tweet";
+      return stats + " Tweets";
     }
   };
 
   return (
     <StTrend>
       <Name to={"/search?q=" + name}>{name}</Name>
-      {stats && <Stats>{statsDescr()}</Stats>}
+      {stats && <Stats>{getStatsDescr()}</Stats>}
       {description && <Description>{description}</Description>}
     </StTrend>
   );
