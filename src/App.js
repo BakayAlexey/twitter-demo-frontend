@@ -1,19 +1,32 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from "react";
+import ProfilePage from "./ProfilePage";
+import { Helmet } from "react-helmet";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Fragment>
+        <Helmet>
+          <title>Twitter</title>
+          <meta name="description" content="descr page" />
+        </Helmet>
+        <Router>
+          <Switch>
+            <Redirect from="/" to="/EveryInteraction" exact />
+            <Route path="/EveryInteraction" component={ProfilePage} />
+            <Route path="/moments" component={ProfilePage} />
+            <Route path="/notifications" component={ProfilePage} />
+            <Route path="/messages" component={ProfilePage} />
+            <Route path="/tweets" component={ProfilePage} />
+          </Switch>
+        </Router>
+      </Fragment>
     );
   }
 }
