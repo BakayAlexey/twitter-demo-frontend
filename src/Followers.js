@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import iconFollowers from "./icons/icon-followers.svg";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import iconFollowers from './icons/icon-followers.svg';
 
 const StFollowers = styled.div`
   padding: 15px 0;
@@ -50,52 +50,68 @@ const Img = styled.img`
 `;
 
 function Follower(props) {
+  const { to, img, description } = props;
   return (
-    <StFollower to={props.to}>
-      <Img src={props.img} alt={props.description} />
+    <StFollower to={to}>
+      <Img src={img} alt={description} />
     </StFollower>
   );
 }
 
 function Followers() {
+  const followersData = [
+    {
+      to: '/followerProfile',
+      img: `${process.env.PUBLIC_URL}/img/followers1.jpg`,
+      description: 'followerDescr',
+    },
+    {
+      to: '/followerProfile',
+      img: `${process.env.PUBLIC_URL}/img/followers2.jpg`,
+      description: 'followerDescr',
+    },
+    {
+      to: '/followerProfile',
+      img: `${process.env.PUBLIC_URL}/img/followers3.jpg`,
+      description: 'followerDescr',
+    },
+    {
+      to: '/followerProfile',
+      img: `${process.env.PUBLIC_URL}/img/followers4.jpg`,
+      description: 'followerDescr',
+    },
+    {
+      to: '/followerProfile',
+      img: `${process.env.PUBLIC_URL}/img/followers5.jpg`,
+      description: 'followerDescr',
+    },
+    {
+      to: '/followerProfile',
+      img: `${process.env.PUBLIC_URL}/img/followers6.jpg`,
+      description: 'followerDescr',
+    },
+  ];
+
+  const followersList = followersData.map(follower => (
+    <Follower
+      key={Math.random()}
+      to={follower.to}
+      img={follower.img}
+      description={follower.description}
+    />
+  ));
+
   return (
     <StFollowers>
       <Head>
         <Icon src={iconFollowers} alt="followers" />
-        <Title to="/followers">6 Followers you know</Title>
+        <Title to="/followers">
+6 Followers you know
+        </Title>
       </Head>
 
       <FollowersList>
-        <Follower
-          to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/followers1.jpg"}
-          description="followerDescr"
-        />
-        <Follower
-          to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/followers2.jpg"}
-          description="followerDescr"
-        />
-        <Follower
-          to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/followers3.jpg"}
-          description="followerDescr"
-        />
-        <Follower
-          to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/followers4.jpg"}
-          description="followerDescr"
-        />
-        <Follower
-          to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/followers5.jpg"}
-          description="followerDescr"
-        />
-        <Follower
-          to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/followers6.jpg"}
-          description="followerDescr"
-        />
+        {followersList}
       </FollowersList>
     </StFollowers>
   );

@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import iconMagnifier from "./icon-magnifier.svg";
+import React from 'react';
+import styled from 'styled-components';
+import iconMagnifier from './icon-magnifier.svg';
 
 const Input = styled.input`
   box-sizing: border-box;

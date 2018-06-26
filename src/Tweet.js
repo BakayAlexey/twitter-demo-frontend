@@ -1,10 +1,10 @@
-import React from "react";
-import iconPinned from "./icons/icon-pinned.svg";
-import iconLoves from "./icons/icon-loves.svg";
-import iconComments from "./icons/icon-comments.svg";
-import iconEnvelope from "./icons/icon-envelope.svg";
-import iconRetweet from "./icons/icon-retweet.svg";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import iconPinned from './icons/icon-pinned.svg';
+import iconLoves from './icons/icon-loves.svg';
+import iconComments from './icons/icon-comments.svg';
+import iconEnvelope from './icons/icon-envelope.svg';
+import iconRetweet from './icons/icon-retweet.svg';
 
 const StTweet = styled.div`
   border-bottom: 1px solid #e1e8ed;
@@ -84,7 +84,7 @@ const Date = styled.a`
   color: #707e88;
   text-decoration: none;
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     width: 4px;
     height: 4px;
@@ -196,39 +196,76 @@ function Pinned() {
   return (
     <StPinned>
       <PinnedIcon src={iconPinned} />
-      <PinnedDescr>Pinned Tweet</PinnedDescr>
+      <PinnedDescr>
+Pinned Tweet
+      </PinnedDescr>
     </StPinned>
   );
 }
 
 function Tweet(props) {
+  const {
+    pinned,
+    avatar,
+    author,
+    authorName,
+    date,
+    bigText,
+    text,
+    image,
+    article,
+    comments,
+    retweet,
+    loves,
+    envelope,
+  } = props;
   return (
     <StTweet>
-      {props.pinned && <Pinned />}
+      {pinned && <Pinned />}
       <Body>
         <Avatar>
-          <Img src={props.avatar} alt="avatar" />
+          <Img src={avatar} alt="avatar" />
         </Avatar>
 
         <div>
-          <Author>{props.author}</Author>
-          <AuthorName>{props.authorName}</AuthorName>
-          <Date>{props.date}</Date>
+          <Author>
+            {author}
+          </Author>
+          <AuthorName>
+            {authorName}
+          </AuthorName>
+          <Date>
+            {date}
+          </Date>
         </div>
 
-        {props.bigText && <TextBig>{props.bigText}</TextBig>}
+        {bigText && (
+        <TextBig>
+          {bigText}
+        </TextBig>
+        )}
 
-        {props.text && <Text>{props.text}</Text>}
+        {text && (
+        <Text>
+          {text}
+        </Text>
+        )}
 
-        {props.image && <Image src={props.image} />}
+        {image && <Image src={image} />}
 
-        {props.article && (
+        {article && (
           <Article>
-            <ArticleImg src={props.article.img} />
+            <ArticleImg src={article.img} />
             <ArticleContent>
-              <ArticleTitle>{props.article.title}</ArticleTitle>
-              <ArticleText>{props.article.text}</ArticleText>
-              <ArticleLink>{props.article.link}</ArticleLink>
+              <ArticleTitle>
+                {article.title}
+              </ArticleTitle>
+              <ArticleText>
+                {article.text}
+              </ArticleText>
+              <ArticleLink>
+                {article.link}
+              </ArticleLink>
             </ArticleContent>
           </Article>
         )}
@@ -236,26 +273,34 @@ function Tweet(props) {
         <ActionList>
           <Action>
             <ActionIcon src={iconComments} alt="comments" />
-            {(props.comments || !props.comments === 0) && (
-              <ActionValue>{props.comments}</ActionValue>
+            {(comments || !comments === 0) && (
+            <ActionValue>
+              {comments}
+            </ActionValue>
             )}
           </Action>
           <Action>
             <ActionIcon src={iconRetweet} alt="retweet" />
-            {(props.retweet || props.retweet === 0) && (
-              <ActionValue>{props.retweet}</ActionValue>
+            {(retweet || !retweet === 0) && (
+            <ActionValue>
+              {retweet}
+            </ActionValue>
             )}
           </Action>
           <Action>
             <ActionIcon src={iconLoves} alt="loves" />
-            {(props.loves || props.loves === 0) && (
-              <ActionValue>{props.loves}</ActionValue>
+            {(loves || !loves === 0) && (
+            <ActionValue>
+              {loves}
+            </ActionValue>
             )}
           </Action>
           <Action>
             <ActionIcon src={iconEnvelope} alt="envelope" />
-            {(props.envelope || props.envelope === 0) && (
-              <ActionValue>{props.envelope}</ActionValue>
+            {(envelope || !envelope === 0) && (
+            <ActionValue>
+              {envelope}
+            </ActionValue>
             )}
           </Action>
         </ActionList>

@@ -1,14 +1,14 @@
-import React from "react";
-import Bar from "./Bar";
-import InfoProfile from "./InfoProfile";
-import Followers from "./Followers";
-import Gallery from "./Gallery";
-import Tweets from "./Tweets";
-import Follows from "./Follows";
-import Trends from "./Trends";
-import Support from "./Support";
-import { Grid, Row, Col } from "react-flexbox-grid";
-import styled from "styled-components";
+import React from 'react';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import styled from 'styled-components';
+import Bar from './Bar';
+import InfoProfile from './InfoProfile';
+import Followers from './Followers';
+import Galleries from './Galleries';
+import Tweets from './Tweets';
+import Follows from './Follows';
+import Trends from './Trends';
+import Support from './Support';
 
 const ProfileImg = styled.img`
   display: block;
@@ -27,10 +27,7 @@ const ProfileContent = styled.div`
 function Main() {
   return (
     <main>
-      <ProfileImg
-        src={process.env.PUBLIC_URL + "/img/profile-image.jpg"}
-        alt="profile_image"
-      />
+      <ProfileImg src={`${process.env.PUBLIC_URL}/img/profile-image.jpg`} alt="profile_image" />
       <Bar />
       <ProfileContent>
         <Grid>
@@ -38,7 +35,7 @@ function Main() {
             <Col md={3}>
               <InfoProfile />
               <Followers />
-              <Gallery />
+              <Galleries />
             </Col>
             <Col md={6}>
               <Tweets />

@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import { Grid, Row, Col } from "react-flexbox-grid";
+import React from 'react';
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 const Nav = styled.div`
   display: flex;
@@ -83,7 +83,7 @@ const IconMore = styled.div`
   border: 1px solid #6c7e8e;
   border-radius: 50%;
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: -1px;
     left: -1px;
@@ -94,7 +94,7 @@ const IconMore = styled.div`
     transform: translate(0, -5px);
   }
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: -1px;
     left: -1px;
@@ -106,34 +106,53 @@ const IconMore = styled.div`
   }
 `;
 
-const Statistics = () => {
+function Statistics() {
+  const navData = {
+    amountTweets: 8058,
+    amountFollowing: 721,
+    amountFollowers: 1815,
+    amountLikes: 460,
+  };
+
   return (
     <Nav>
       <StLink to="/tweets">
-        <Name>Tweets</Name>
-        <Amount>8,058</Amount>
+        <Name>
+Tweets
+        </Name>
+        <Amount>
+          {navData.amountTweets}
+        </Amount>
       </StLink>
       <StLink to="/following">
-        <Name>Following</Name>
-        <Amount>721</Amount>
+        <Name>
+Following
+        </Name>
+        <Amount>
+          {navData.amountFollowing}
+        </Amount>
       </StLink>
       <StLink to="/followers">
-        <Name>Followers</Name>
-        <Amount>1,815</Amount>
+        <Name>
+Followers
+        </Name>
+        <Amount>
+          {navData.amountFollowers}
+        </Amount>
       </StLink>
       <StLink to="/likes">
-        <Name>Likes</Name>
-        <Amount>460</Amount>
-      </StLink>
-      <StLink to="/lists">
-        <Name>Lists</Name>
-        <Amount>2</Amount>
+        <Name>
+Likes
+        </Name>
+        <Amount>
+          {navData.amountLikes}
+        </Amount>
       </StLink>
     </Nav>
   );
-};
+}
 
-const Bar = () => {
+function Bar() {
   return (
     <BarStyled>
       <Grid>
@@ -141,7 +160,9 @@ const Bar = () => {
           <Col mdOffset={3} md={9}>
             <Content>
               <Statistics />
-              <Button>Follow</Button>
+              <Button>
+Follow
+              </Button>
               <BtnMore>
                 <IconMore />
               </BtnMore>
@@ -151,6 +172,6 @@ const Bar = () => {
       </Grid>
     </BarStyled>
   );
-};
+}
 
 export default Bar;
