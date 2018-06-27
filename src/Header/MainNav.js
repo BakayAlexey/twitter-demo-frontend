@@ -42,7 +42,7 @@ const LinkStyled = styled(NavLink)`
 
 const MainNav = () => (
   <Nav>
-    <LinkStyled to="/">
+    <LinkStyled to="/" exact>
       <Icon src={iconHome} alt="Home" />
       <Text>
 Home

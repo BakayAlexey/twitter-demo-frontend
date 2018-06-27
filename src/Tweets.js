@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Tweet from './Tweet';
 
@@ -114,18 +114,41 @@ function Tweets() {
   return (
     <StTweets>
       <Nav>
-        <LinkStyled to="/">
-Tweets
+        <LinkStyled to="/EveryInteraction" exact>
+          Tweets
         </LinkStyled>
-        <LinkStyled to="/tweets_replies">
+        <LinkStyled to="/EveryInteraction/tweets_replies">
 Tweets &amp; replies
         </LinkStyled>
-        <LinkStyled to="/media">
+        <LinkStyled to="/EveryInteraction/media">
 Media
         </LinkStyled>
       </Nav>
+
       <List>
-        {tweetsList}
+        <Route
+          exact
+          path="/EveryInteraction"
+          render={() => (
+            tweetsList
+          )}
+        />
+        <Route
+          path="/EveryInteraction/tweets_replies"
+          render={() => (
+            <h2>
+tweets_replies
+            </h2>
+          )}
+        />
+        <Route
+          path="/EveryInteraction/media"
+          render={() => (
+            <h2>
+media
+            </h2>
+          )}
+        />
       </List>
     </StTweets>
   );
