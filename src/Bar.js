@@ -27,10 +27,12 @@ const StLink = styled(NavLink)`
   color: #707e88;
   text-align: center;
   text-decoration: none;
+  &.active,
   &:hover {
     color: #1da1f2;
     border-bottom: 4px solid #1da1f2;
   }
+  &.active,
   &:hover ${Amount} {
     color: #1da1f2;
   }
@@ -106,7 +108,7 @@ const IconMore = styled.div`
   }
 `;
 
-function Statistics() {
+function Statistics({ match }) {
   const navData = {
     amountTweets: 8058,
     amountFollowing: 721,
@@ -116,7 +118,7 @@ function Statistics() {
 
   return (
     <Nav>
-      <StLink to="/tweets">
+      <StLink to={`${match.url}`} exact>
         <Name>
 Tweets
         </Name>
@@ -124,7 +126,7 @@ Tweets
           {navData.amountTweets}
         </Amount>
       </StLink>
-      <StLink to="/following">
+      <StLink to={`${match.url}/following`}>
         <Name>
 Following
         </Name>
@@ -132,7 +134,7 @@ Following
           {navData.amountFollowing}
         </Amount>
       </StLink>
-      <StLink to="/followers">
+      <StLink to={`${match.url}/followers`}>
         <Name>
 Followers
         </Name>
@@ -140,7 +142,7 @@ Followers
           {navData.amountFollowers}
         </Amount>
       </StLink>
-      <StLink to="/likes">
+      <StLink to={`${match.url}/likes`}>
         <Name>
 Likes
         </Name>
@@ -152,14 +154,14 @@ Likes
   );
 }
 
-function Bar() {
+function Bar({ match }) {
   return (
     <BarStyled>
       <Grid>
         <Row>
           <Col mdOffset={3} md={9}>
             <Content>
-              <Statistics />
+              <Statistics match={match} />
               <Button>
 Follow
               </Button>

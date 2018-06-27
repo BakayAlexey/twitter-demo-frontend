@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import styled from 'styled-components';
+import { Route, Switch } from 'react-router-dom';
 import Bar from './Bar';
 import InfoProfile from './InfoProfile';
 import Followers from './Followers';
@@ -24,27 +25,74 @@ const ProfileContent = styled.div`
   background-color: #e6ecf0;
 `;
 
-function Main() {
+function Main(props) {
+  const {
+    match,
+    match: {
+      params: { username },
+    },
+  } = props;
+
   return (
     <main>
       <ProfileImg src={`${process.env.PUBLIC_URL}/img/profile-image.jpg`} alt="profile_image" />
-      <Bar />
+      <Bar match={match} />
       <ProfileContent>
         <Grid>
           <Row>
             <Col md={3}>
-              <InfoProfile />
+              <InfoProfile username={username} />
               <Followers />
               <Galleries />
             </Col>
-            <Col md={6}>
-              <Tweets />
-            </Col>
-            <Col md={3}>
-              <Follows />
-              <Trends />
-              <Support />
-            </Col>
+
+            <Switch>
+              <Route
+                path={`${match.url}/following`}
+                render={() => (
+                  <Col md={9}>
+                    <h2>
+following
+                    </h2>
+                  </Col>
+                )}
+              />
+              <Route
+                path={`${match.url}/followers`}
+                render={() => (
+                  <Col md={9}>
+                    <h2>
+followers
+                    </h2>
+                  </Col>
+                )}
+              />
+              <Route
+                path={`${match.url}/likes`}
+                render={() => (
+                  <Col md={9}>
+                    <h2>
+likes
+                    </h2>
+                  </Col>
+                )}
+              />
+              <Route
+                path={`${match.url}`}
+                render={() => (
+                  <Fragment>
+                    <Col md={6}>
+                      <Tweets match={match} />
+                    </Col>
+                    <Col md={3}>
+                      <Follows />
+                      <Trends />
+                      <Support />
+                    </Col>
+                  </Fragment>
+                )}
+              />
+            </Switch>
           </Row>
         </Grid>
       </ProfileContent>

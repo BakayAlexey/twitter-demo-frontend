@@ -153,57 +153,62 @@ const Button = styled.button`
   }
 `;
 
-const InfoProfile = () => (
-  <StInfoProfile>
-    <AvatarWrap>
-      <Avatar src={`${process.env.PUBLIC_URL}/img/avatar-big.png`} alt="profile_image" />
-    </AvatarWrap>
-    <div>
-      <Name>
-Every Interaction
-      </Name>
-      <Verified src={tick} alt="verified" />
-    </div>
-    <div>
-      <NameLink to="EveryInteract">
-@EveryInteract
-      </NameLink>
-      <Follows to="/followers">
+function InfoProfile(props) {
+  const { username } = props;
+
+  return (
+    <StInfoProfile>
+      <AvatarWrap>
+        <Avatar src={`${process.env.PUBLIC_URL}/img/avatar-big.png`} alt="profile_image" />
+      </AvatarWrap>
+      <div>
+        <Name>
+          {username}
+        </Name>
+        <Verified src={tick} alt="verified" />
+      </div>
+      <div>
+        <NameLink to="EveryInteract">
+          @
+          {username}
+        </NameLink>
+        <Follows to="/followers">
 Follows you
-      </Follows>
-    </div>
-    <Description>
+        </Follows>
+      </div>
+      <Description>
         UX Design studio focussed problem solving creativity. Design to us is how can we make things
         *work* amazing.
-    </Description>
-    <Location>
-      <Img src={iconLocation} alt="location" />
-      <span>
+      </Description>
+      <Location>
+        <Img src={iconLocation} alt="location" />
+        <span>
 London, UK
-        {' '}
-      </span>
-    </Location>
-    <LinkSite>
-      <Img src={iconLink} alt="link site" />
-      <a href="everyinteraction.com">
+          {' '}
+        </span>
+      </Location>
+      <LinkSite>
+        <Img src={iconLink} alt="link site" />
+        <a href="everyinteraction.com">
 everyinteraction.com
-      </a>
-    </LinkSite>
-    <Joined>
-      <Img src={iconJoined} alt="joined" />
-      <span>
+        </a>
+      </LinkSite>
+      <Joined>
+        <Img src={iconJoined} alt="joined" />
+        <span>
 Joined May 2008
-      </span>
-    </Joined>
-    <BtnGroup>
-      <Button>
+        </span>
+      </Joined>
+      <BtnGroup>
+        <Button>
 Tweet to
-      </Button>
-      <Button>
+        </Button>
+        <Button>
 Message
-      </Button>
-    </BtnGroup>
-  </StInfoProfile>
-);
+        </Button>
+      </BtnGroup>
+    </StInfoProfile>
+  );
+}
 
 export default InfoProfile;

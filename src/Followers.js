@@ -61,32 +61,32 @@ function Follower(props) {
 function Followers() {
   const followersData = [
     {
-      to: '/followerProfile',
+      to: '/salahov30',
       img: `${process.env.PUBLIC_URL}/img/followers1.jpg`,
       description: 'followerDescr',
     },
     {
-      to: '/followerProfile',
+      to: '/VonderVuflya‏',
       img: `${process.env.PUBLIC_URL}/img/followers2.jpg`,
       description: 'followerDescr',
     },
     {
-      to: '/followerProfile',
+      to: '/noveltyshoe',
       img: `${process.env.PUBLIC_URL}/img/followers3.jpg`,
       description: 'followerDescr',
     },
     {
-      to: '/followerProfile',
+      to: '/Artsalve',
       img: `${process.env.PUBLIC_URL}/img/followers4.jpg`,
       description: 'followerDescr',
     },
     {
-      to: '/followerProfile',
+      to: '/aya_ulan',
       img: `${process.env.PUBLIC_URL}/img/followers5.jpg`,
       description: 'followerDescr',
     },
     {
-      to: '/followerProfile',
+      to: '/lighthorsechris',
       img: `${process.env.PUBLIC_URL}/img/followers6.jpg`,
       description: 'followerDescr',
     },

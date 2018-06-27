@@ -119,9 +119,9 @@ const NameLink = styled(Link)`
   }
 `;
 
-const Button = styled.button`
+const Button = styled(Link)`
   box-sizing: border-box;
-  display: block;
+  display: inline-block;
   padding: 6px 21px 5px 21px;
   background: none;
   border: 1px solid #1da1f2;
@@ -131,6 +131,7 @@ const Button = styled.button`
   font-weight: bold;
   color: #1da1f2;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
   &:hover {
     background-color: #e8f5fd;
@@ -210,7 +211,7 @@ function FollowUser(props) {
           {nameLink}
         </NameLink>
       </UserData>
-      <Button>
+      <Button to={`/${name}`}>
 Follow
       </Button>
     </StFollowUser>

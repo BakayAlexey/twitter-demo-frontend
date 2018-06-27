@@ -40,10 +40,10 @@ Twitter - Profile
       <Header />
       <Switch>
         <Redirect from="/" to="/EveryInteraction" exact />
-        <Route path="/EveryInteraction" component={Main} />
         <Route path="/moments" component={Moments} />
         <Route path="/notifications" component={Notifications} />
         <Route path="/messages" component={Messages} />
+        <Route path="/:username" component={Main} />
       </Switch>
     </Fragment>
   );

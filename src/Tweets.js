@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import Tweet from './Tweet';
 
@@ -31,7 +31,7 @@ const LinkStyled = styled(NavLink)`
 
 const List = styled.div``;
 
-function Tweets() {
+function Tweets({ match }) {
   const TweetsData = [
     {
       pinned: true,
@@ -114,41 +114,37 @@ function Tweets() {
   return (
     <StTweets>
       <Nav>
-        <LinkStyled to="/EveryInteraction" exact>
+        <LinkStyled to={`${match.url}`} exact>
           Tweets
         </LinkStyled>
-        <LinkStyled to="/EveryInteraction/tweets_replies">
+        <LinkStyled to={`${match.url}/tweets_replies`}>
 Tweets &amp; replies
         </LinkStyled>
-        <LinkStyled to="/EveryInteraction/media">
+        <LinkStyled to={`${match.url}/media`}>
 Media
         </LinkStyled>
       </Nav>
 
       <List>
-        <Route
-          exact
-          path="/EveryInteraction"
-          render={() => (
-            tweetsList
-          )}
-        />
-        <Route
-          path="/EveryInteraction/tweets_replies"
-          render={() => (
-            <h2>
+        <Switch>
+          <Route
+            path={`${match.url}/tweets_replies`}
+            render={() => (
+              <h2>
 tweets_replies
-            </h2>
-          )}
-        />
-        <Route
-          path="/EveryInteraction/media"
-          render={() => (
-            <h2>
+              </h2>
+            )}
+          />
+          <Route
+            path={`${match.url}/media`}
+            render={() => (
+              <h2>
 media
-            </h2>
-          )}
-        />
+              </h2>
+            )}
+          />
+          <Route path={`${match.url}`} render={() => tweetsList} />
+        </Switch>
       </List>
     </StTweets>
   );
