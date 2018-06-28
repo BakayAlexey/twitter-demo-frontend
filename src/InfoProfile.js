@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import tick from './icons/tick.svg';
 import iconLocation from './icons/icon-location.svg';
 import iconLink from './icons/icon-link.svg';
@@ -153,9 +153,11 @@ const Button = styled.button`
   }
 `;
 
-function InfoProfile(props) {
-  const { username } = props;
-
+function InfoProfile({
+  match: {
+    params: { username },
+  },
+}) {
   return (
     <StInfoProfile>
       <AvatarWrap>
@@ -211,4 +213,4 @@ Message
   );
 }
 
-export default InfoProfile;
+export default withRouter(InfoProfile);

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 const Nav = styled.div`
@@ -176,4 +176,4 @@ Follow
   );
 }
 
-export default Bar;
+export default withRouter(Bar);

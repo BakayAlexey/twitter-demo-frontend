@@ -25,23 +25,16 @@ const ProfileContent = styled.div`
   background-color: #e6ecf0;
 `;
 
-function Main(props) {
-  const {
-    match,
-    match: {
-      params: { username },
-    },
-  } = props;
-
+function Main({ match }) {
   return (
     <main>
       <ProfileImg src={`${process.env.PUBLIC_URL}/img/profile-image.jpg`} alt="profile_image" />
-      <Bar match={match} />
+      <Bar />
       <ProfileContent>
         <Grid>
           <Row>
             <Col md={3}>
-              <InfoProfile username={username} />
+              <InfoProfile />
               <Followers />
               <Galleries />
             </Col>
