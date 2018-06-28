@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
 
 const StTrends = styled.div`
   box-sizing: border-box;
@@ -81,18 +82,6 @@ const Description = styled.div`
 
 function Trend(props) {
   const { name, stats, description } = props;
-  const getStatsDescr = () => {
-    if (stats > 10000) {
-      return `${(stats / 1000).toFixed(1)}K Tweets`;
-    }
-    if (stats >= 1000) {
-      return `${(stats / 1000).toFixed(3).replace('.', ',')} Tweets`;
-    }
-    if (stats === 1) {
-      return '1 Tweet';
-    }
-    return `${stats} Tweets`;
-  };
 
   return (
     <StTrend>
@@ -100,9 +89,17 @@ function Trend(props) {
         {name}
       </Name>
       {stats && (
-      <Stats>
-        {getStatsDescr()}
-      </Stats>
+        <Stats>
+          <FormattedMessage
+            id="tweets"
+            defaultMessage={
+              '{count, number} {count, plural, one {Tweet} other {Tweets}}'
+            }
+            values={{
+              count: stats,
+            }}
+          />
+        </Stats>
       )}
       {description && (
       <Description>

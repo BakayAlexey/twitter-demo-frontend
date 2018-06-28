@@ -2,13 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { FormattedMessage } from 'react-intl';
 
 const Nav = styled.div`
   display: flex;
   margin-right: auto;
 `;
 
-const Name = styled.div``;
+const Name = styled.div`
+  color: #707e88;
+`;
 
 const Amount = styled.div`
   font-size: 18px;
@@ -32,8 +35,7 @@ const StLink = styled(NavLink)`
     color: #1da1f2;
     border-bottom: 4px solid #1da1f2;
   }
-  &.active,
-  &:hover ${Amount} {
+  &.active ${Amount}, &:hover ${Amount} {
     color: #1da1f2;
   }
 `;
@@ -108,7 +110,7 @@ const IconMore = styled.div`
   }
 `;
 
-function Statistics({ match }) {
+const Statistics = withRouter(({ match }) => {
   const navData = {
     amountTweets: 8058,
     amountFollowing: 721,
@@ -123,7 +125,13 @@ function Statistics({ match }) {
 Tweets
         </Name>
         <Amount>
-          {navData.amountTweets}
+          <FormattedMessage
+            id="tweets"
+            defaultMessage={'{count, number}'}
+            values={{
+              count: navData.amountTweets,
+            }}
+          />
         </Amount>
       </StLink>
       <StLink to={`${match.url}/following`}>
@@ -131,7 +139,13 @@ Tweets
 Following
         </Name>
         <Amount>
-          {navData.amountFollowing}
+          <FormattedMessage
+            id="following"
+            defaultMessage={'{count, number}'}
+            values={{
+              count: navData.amountFollowing,
+            }}
+          />
         </Amount>
       </StLink>
       <StLink to={`${match.url}/followers`}>
@@ -139,7 +153,13 @@ Following
 Followers
         </Name>
         <Amount>
-          {navData.amountFollowers}
+          <FormattedMessage
+            id="followers"
+            defaultMessage={'{count, number}'}
+            values={{
+              count: navData.amountFollowers,
+            }}
+          />
         </Amount>
       </StLink>
       <StLink to={`${match.url}/likes`}>
@@ -147,21 +167,27 @@ Followers
 Likes
         </Name>
         <Amount>
-          {navData.amountLikes}
+          <FormattedMessage
+            id="likes"
+            defaultMessage={'{count, number}'}
+            values={{
+              count: navData.amountLikes,
+            }}
+          />
         </Amount>
       </StLink>
     </Nav>
   );
-}
+});
 
-function Bar({ match }) {
+function Bar() {
   return (
     <BarStyled>
       <Grid>
         <Row>
           <Col mdOffset={3} md={9}>
             <Content>
-              <Statistics match={match} />
+              <Statistics />
               <Button>
 Follow
               </Button>
@@ -176,4 +202,4 @@ Follow
   );
 }
 
-export default withRouter(Bar);
+export default Bar;

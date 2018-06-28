@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
 import ProfilePage from './ProfilePage';
 
 const StaticPages = ({ match }) => (
@@ -18,15 +19,17 @@ Twitter
         </title>
         <meta name="description" content="descr page" />
       </Helmet>
-      <Router>
-        <Switch>
-          <Route
-            path="/:direction(about|helpCenter|terms|privacyPolicy|cookies|adsInfo)"
-            component={StaticPages}
-          />
-          <Route path="/" component={ProfilePage} />
-        </Switch>
-      </Router>
+      <IntlProvider locale="en">
+        <Router>
+          <Switch>
+            <Route
+              path="/:direction(about|helpCenter|terms|privacyPolicy|cookies|adsInfo)"
+              component={StaticPages}
+            />
+            <Route path="/" component={ProfilePage} />
+          </Switch>
+        </Router>
+      </IntlProvider>
     </Fragment>
   );
 }
