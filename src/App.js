@@ -3,6 +3,12 @@ import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProfilePage from './ProfilePage';
 
+const StaticPages = ({ match }) => (
+  <h2>
+    {match.params.direction}
+  </h2>
+);
+
 function App() {
   return (
     <Fragment>
@@ -15,52 +21,8 @@ Twitter
       <Router>
         <Switch>
           <Route
-            path="/about"
-            render={() => (
-              <h2>
-about
-              </h2>
-            )}
-          />
-          <Route
-            path="/helpCenter"
-            render={() => (
-              <h2>
-helpCenter
-              </h2>
-            )}
-          />
-          <Route
-            path="/terms"
-            render={() => (
-              <h2>
-terms
-              </h2>
-            )}
-          />
-          <Route
-            path="/privacyPolicy"
-            render={() => (
-              <h2>
-privacyPolicy
-              </h2>
-            )}
-          />
-          <Route
-            path="/cookies"
-            render={() => (
-              <h2>
-cookies
-              </h2>
-            )}
-          />
-          <Route
-            path="/adsInfo"
-            render={() => (
-              <h2>
-adsInfo
-              </h2>
-            )}
+            path="/:direction(about|helpCenter|terms|privacyPolicy|cookies|adsInfo)"
+            component={StaticPages}
           />
           <Route path="/" component={ProfilePage} />
         </Switch>
