@@ -116,6 +116,7 @@ const Statistics = withRouter(({ match }) => {
     amountFollowing: 721,
     amountFollowers: 1815,
     amountLikes: 460,
+    amountLists: 2,
   };
 
   return (
@@ -172,6 +173,20 @@ Likes
             defaultMessage={'{count, number}'}
             values={{
               count: navData.amountLikes,
+            }}
+          />
+        </Amount>
+      </StLink>
+      <StLink to={`${match.url}/lists`}>
+        <Name>
+Lists
+        </Name>
+        <Amount>
+          <FormattedMessage
+            id="lists"
+            defaultMessage={'{count, number}'}
+            values={{
+              count: navData.amountLists,
             }}
           />
         </Amount>

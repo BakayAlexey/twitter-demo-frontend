@@ -71,6 +71,16 @@ likes
                 )}
               />
               <Route
+                path={`${match.url}/lists`}
+                render={() => (
+                  <Col md={9}>
+                    <h2>
+lists
+                    </h2>
+                  </Col>
+                )}
+              />
+              <Route
                 path={`${match.url}`}
                 render={() => (
                   <Fragment>
