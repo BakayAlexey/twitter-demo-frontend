@@ -110,90 +110,88 @@ const IconMore = styled.div`
   }
 `;
 
-const Statistics = withRouter(({ match }) => {
-  const navData = {
-    amountTweets: 8058,
-    amountFollowing: 721,
-    amountFollowers: 1815,
-    amountLikes: 460,
-    amountLists: 2,
-  };
+const navData = {
+  amountTweets: 8058,
+  amountFollowing: 721,
+  amountFollowers: 1815,
+  amountLikes: 460,
+  amountLists: 2,
+};
 
-  return (
-    <Nav>
-      <StLink to={`${match.url}`} exact>
-        <Name>
+const Statistics = withRouter(({ match }) => (
+  <Nav>
+    <StLink to={`${match.url}`} exact>
+      <Name>
 Tweets
-        </Name>
-        <Amount>
-          <FormattedMessage
-            id="tweets"
-            defaultMessage={'{count, number}'}
-            values={{
-              count: navData.amountTweets,
-            }}
-          />
-        </Amount>
-      </StLink>
-      <StLink to={`${match.url}/following`}>
-        <Name>
+      </Name>
+      <Amount>
+        <FormattedMessage
+          id="tweets"
+          defaultMessage={'{count, number}'}
+          values={{
+            count: navData.amountTweets,
+          }}
+        />
+      </Amount>
+    </StLink>
+    <StLink to={`${match.url}/following`}>
+      <Name>
 Following
-        </Name>
-        <Amount>
-          <FormattedMessage
-            id="following"
-            defaultMessage={'{count, number}'}
-            values={{
-              count: navData.amountFollowing,
-            }}
-          />
-        </Amount>
-      </StLink>
-      <StLink to={`${match.url}/followers`}>
-        <Name>
+      </Name>
+      <Amount>
+        <FormattedMessage
+          id="following"
+          defaultMessage={'{count, number}'}
+          values={{
+            count: navData.amountFollowing,
+          }}
+        />
+      </Amount>
+    </StLink>
+    <StLink to={`${match.url}/followers`}>
+      <Name>
 Followers
-        </Name>
-        <Amount>
-          <FormattedMessage
-            id="followers"
-            defaultMessage={'{count, number}'}
-            values={{
-              count: navData.amountFollowers,
-            }}
-          />
-        </Amount>
-      </StLink>
-      <StLink to={`${match.url}/likes`}>
-        <Name>
+      </Name>
+      <Amount>
+        <FormattedMessage
+          id="followers"
+          defaultMessage={'{count, number}'}
+          values={{
+            count: navData.amountFollowers,
+          }}
+        />
+      </Amount>
+    </StLink>
+    <StLink to={`${match.url}/likes`}>
+      <Name>
 Likes
-        </Name>
-        <Amount>
-          <FormattedMessage
-            id="likes"
-            defaultMessage={'{count, number}'}
-            values={{
-              count: navData.amountLikes,
-            }}
-          />
-        </Amount>
-      </StLink>
-      <StLink to={`${match.url}/lists`}>
-        <Name>
+      </Name>
+      <Amount>
+        <FormattedMessage
+          id="likes"
+          defaultMessage={'{count, number}'}
+          values={{
+            count: navData.amountLikes,
+          }}
+        />
+      </Amount>
+    </StLink>
+    <StLink to={`${match.url}/lists`}>
+      <Name>
 Lists
-        </Name>
-        <Amount>
-          <FormattedMessage
-            id="lists"
-            defaultMessage={'{count, number}'}
-            values={{
-              count: navData.amountLists,
-            }}
-          />
-        </Amount>
-      </StLink>
-    </Nav>
-  );
-});
+      </Name>
+      <Amount>
+        <FormattedMessage
+          id="lists"
+          defaultMessage={'{count, number}'}
+          values={{
+            count: navData.amountLists,
+          }}
+        />
+      </Amount>
+    </StLink>
+  </Nav>
+));
 
 function Bar() {
   return (
