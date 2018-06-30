@@ -37,19 +37,19 @@ function Support() {
       <StLink to="/about">
 About
       </StLink>
-      <StLink to="/helpCenter">
+      <StLink to="/help-center">
 Help Center
       </StLink>
       <StLink to="/terms">
 Terms
       </StLink>
-      <StLink to="/privacyPolicy">
+      <StLink to="/privacy-policy">
 Privacy policy
       </StLink>
       <StLink to="/cookies">
 Cookies
       </StLink>
-      <StLink to="/adsInfo">
+      <StLink to="/ads-info">
 Ads info
       </StLink>
     </StSupport>

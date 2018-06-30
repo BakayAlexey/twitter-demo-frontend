@@ -1,5 +1,7 @@
 import React from 'react';
-import { NavLink, Route, Switch } from 'react-router-dom';
+import {
+  NavLink, Route, Switch, withRouter,
+} from 'react-router-dom';
 import styled from 'styled-components';
 import Tweet from './Tweet';
 
@@ -31,7 +33,7 @@ const LinkStyled = styled(NavLink)`
 
 const List = styled.div``;
 
-function Tweets({ match }) {
+const Tweets = withRouter(({ match }) => {
   const TweetsData = [
     {
       pinned: true,
@@ -117,7 +119,7 @@ function Tweets({ match }) {
         <LinkStyled to={`${match.url}`} exact>
           Tweets
         </LinkStyled>
-        <LinkStyled to={`${match.url}/tweets_replies`}>
+        <LinkStyled to={`${match.url}/tweets-replies`}>
 Tweets &amp; replies
         </LinkStyled>
         <LinkStyled to={`${match.url}/media`}>
@@ -128,10 +130,10 @@ Media
       <List>
         <Switch>
           <Route
-            path={`${match.url}/tweets_replies`}
+            path={`${match.url}/tweets-replies`}
             render={() => (
               <h2>
-tweets_replies
+tweets-replies
               </h2>
             )}
           />
@@ -148,6 +150,6 @@ media
       </List>
     </StTweets>
   );
-}
+});
 
 export default Tweets;

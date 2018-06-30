@@ -85,7 +85,7 @@ lists
                 render={() => (
                   <Fragment>
                     <Col md={6}>
-                      <Tweets match={match} />
+                      <Tweets />
                     </Col>
                     <Col md={3}>
                       <Follows />

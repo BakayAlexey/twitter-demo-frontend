@@ -23,7 +23,7 @@ Twitter
         <Router>
           <Switch>
             <Route
-              path="/:direction(about|helpCenter|terms|privacyPolicy|cookies|adsInfo)"
+              path="/:direction(about|help-center|terms|privacy-policy|cookies|ads-info)"
               component={StaticPages}
             />
             <Route path="/" component={ProfilePage} />

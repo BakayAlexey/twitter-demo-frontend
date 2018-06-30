@@ -153,64 +153,58 @@ const Button = styled.button`
   }
 `;
 
-function InfoProfile({
-  match: {
-    params: { username },
-  },
-}) {
-  return (
-    <StInfoProfile>
-      <AvatarWrap>
-        <Avatar src={`${process.env.PUBLIC_URL}/img/avatar-big.png`} alt="profile_image" />
-      </AvatarWrap>
-      <div>
-        <Name>
-          {username}
-        </Name>
-        <Verified src={tick} alt="verified" />
-      </div>
-      <div>
-        <NameLink to="EveryInteract">
-          @
-          {username}
-        </NameLink>
-        <Follows to="/followers">
+const InfoProfile = withRouter(({ match: { params: { username } } }) => (
+  <StInfoProfile>
+    <AvatarWrap>
+      <Avatar src={`${process.env.PUBLIC_URL}/img/avatar-big.png`} alt="profile_image" />
+    </AvatarWrap>
+    <div>
+      <Name>
+        {username}
+      </Name>
+      <Verified src={tick} alt="verified" />
+    </div>
+    <div>
+      <NameLink to="EveryInteract">
+        @
+        {username}
+      </NameLink>
+      <Follows to="/followers">
 Follows you
-        </Follows>
-      </div>
-      <Description>
-        UX Design studio focussed problem solving creativity. Design to us is how can we make things
-        *work* amazing.
-      </Description>
-      <Location>
-        <Img src={iconLocation} alt="location" />
-        <span>
+      </Follows>
+    </div>
+    <Description>
+      UX Design studio focussed problem solving creativity. Design to us is how can we make things
+      *work* amazing.
+    </Description>
+    <Location>
+      <Img src={iconLocation} alt="location" />
+      <span>
 London, UK
-          {' '}
-        </span>
-      </Location>
-      <LinkSite>
-        <Img src={iconLink} alt="link site" />
-        <a href="everyinteraction.com">
+        {' '}
+      </span>
+    </Location>
+    <LinkSite>
+      <Img src={iconLink} alt="link site" />
+      <a href="everyinteraction.com">
 everyinteraction.com
-        </a>
-      </LinkSite>
-      <Joined>
-        <Img src={iconJoined} alt="joined" />
-        <span>
+      </a>
+    </LinkSite>
+    <Joined>
+      <Img src={iconJoined} alt="joined" />
+      <span>
 Joined May 2008
-        </span>
-      </Joined>
-      <BtnGroup>
-        <Button>
+      </span>
+    </Joined>
+    <BtnGroup>
+      <Button>
 Tweet to
-        </Button>
-        <Button>
+      </Button>
+      <Button>
 Message
-        </Button>
-      </BtnGroup>
-    </StInfoProfile>
-  );
-}
+      </Button>
+    </BtnGroup>
+  </StInfoProfile>
+));
 
-export default withRouter(InfoProfile);
+export default InfoProfile;
