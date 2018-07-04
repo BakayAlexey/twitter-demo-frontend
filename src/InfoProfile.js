@@ -157,7 +157,7 @@ function InfoProfile({ userData }) {
   return (
     <StInfoProfile>
       <AvatarWrap>
-        <Avatar src={`${process.env.PUBLIC_URL}/img/avatar-big.png`} alt="profile_image" />
+        <Avatar src={userData.avatar_static} alt="profile_image" />
       </AvatarWrap>
       <div>
         <Name>

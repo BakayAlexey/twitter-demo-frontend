@@ -31,24 +31,35 @@ Messages
 class ProfilePage extends Component {
   state = {
     userData: {},
+    error: null,
   };
 
   componentDidMount() {
-    fetch(
-      `https://twitter-demo.erodionov.ru/api/v1/accounts/1?access_token=${
-        process.env.REACT_APP_KEY
-      }`,
-    )
-      .then(response => response.json())
-      .then((userData) => {
-        console.log(userData);
-        this.setState({ userData });
-      })
-      .catch(alert);
+    const hostname = 'https://twitter-demo.erodionov.ru';
+    const secretKey = process.env.REACT_APP_KEY;
+
+    fetch(`${hostname}/api/v1/accounts/1?access_token=${secretKey}`)
+      .then(res => res.json())
+      .then(
+        (response) => {
+          this.setState({ userData: response });
+        },
+        (error) => {
+          this.setState({ error });
+        },
+      );
   }
 
   render() {
-    const { userData } = this.state;
+    const { userData, error } = this.state;
+
+    if (error) {
+      return (
+        <div>
+Error
+        </div>
+      );
+    }
 
     return (
       <Fragment>
@@ -58,13 +69,13 @@ Twitter - Profile
           </title>
           <meta name="description" content="descr profile page" />
         </Helmet>
-        <Header avatar={userData.avatar_static} />
+        <Header />
         <Switch>
           <Redirect from="/" to="/admin" exact />
           <Route path="/moments" component={Moments} />
           <Route path="/notifications" component={Notifications} />
           <Route path="/messages" component={Messages} />
-          <Route path="/:username" render={() => <Main userData={userData} />} />
+          <Route path="/:username" render={props => <Main {...props} userData={userData} />} />
         </Switch>
       </Fragment>
     );

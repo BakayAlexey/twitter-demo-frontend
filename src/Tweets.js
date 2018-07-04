@@ -35,45 +35,67 @@ const List = styled.div``;
 
 class Tweets extends Component {
   constructor(props) {
-    console.log(props);
     super(props);
 
     this.state = {
       tweetsData: [],
+      error: null,
     };
   }
 
   componentDidMount() {
     const { id } = this.props;
-    fetch(
-      `https://twitter-demo.erodionov.ru/api/v1/accounts/${id}/statuses?access_token=${
-        process.env.REACT_APP_KEY
-      }`,
-    )
-      .then(response => response.json())
-      .then((userData) => {
-        console.log('tweets', userData);
-        // this.setState({ userData });
-      });
+
+    if (id) {
+      const hostname = 'https://twitter-demo.erodionov.ru';
+      const secretKey = process.env.REACT_APP_KEY;
+
+      fetch(`${hostname}/api/v1/accounts/${id}/statuses?access_token=${secretKey}`)
+        .then(res => res.json())
+        .then(
+          (response) => {
+            console.log(response);
+            this.setState({ tweetsData: response });
+          },
+          (error) => {
+            this.setState({ error });
+          },
+        );
+    }
   }
 
   render() {
     const { match } = this.props;
-    const { tweetsData } = this.state;
+    const { tweetsData, error } = this.state;
+
+    if (error) {
+      return (
+        <div>
+Error
+        </div>
+      );
+    }
+
+    if (tweetsData.length === 0) {
+      return (
+        <div>
+No tweets
+        </div>
+      );
+    }
 
     const tweetsList = tweetsData.map(tweet => (
       <Tweet
-        key={Math.random()}
+        key={tweet.id}
+        tweetId={tweet.id}
         pinned={tweet.pinned}
-        avatar={tweet.avatar}
-        author={tweet.author}
-        authorName={tweet.authorName}
-        date={tweet.date}
-        srcImg={tweet.srcImg}
-        text={tweet.text}
+        avatar={tweet.account.avatar_static}
+        author={tweet.account.display_name}
+        authorName={`@${tweet.account.username}`}
+        date={tweet.created_at}
+        text={tweet.content}
         bigText={tweet.bigText}
-        image={tweet.image}
-        article={tweet.article}
+        image={tweet.media_attachments.length > 0 && tweet.media_attachments[0].url}
         comments={tweet.comments}
         retweet={tweet.retweet}
         loves={tweet.loves}

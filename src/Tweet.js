@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import iconPinned from './icons/icon-pinned.svg';
 import iconLoves from './icons/icon-loves.svg';
@@ -39,7 +39,7 @@ const Body = styled.div`
 
 const Avatar = styled.div`
   position: absolute;
-  top: 0;
+  top: 12px;
   left: 15px;
   width: 41px;
   height: 41px;
@@ -74,7 +74,7 @@ const AuthorName = styled.div`
   text-decoration: none;
 `;
 
-const Date = styled.a`
+const TweetDate = styled.a`
   position: relative;
   display: inline-block;
   padding-left: 7px;
@@ -163,6 +163,10 @@ const ArticleText = styled.div`
 const ArticleLink = styled.a`
   display: block;
   color: #667580;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const ActionList = styled.div`
@@ -203,9 +207,74 @@ Pinned Tweet
   );
 }
 
+class ArticleTweet extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      articleData: {},
+      error: null,
+    };
+  }
+
+  componentDidMount() {
+    const { id } = this.props;
+
+    if (id) {
+      const hostname = 'https://twitter-demo.erodionov.ru';
+      const secretKey = process.env.REACT_APP_KEY;
+
+      fetch(`${hostname}/api/v1/statuses/${id}/card?access_token=${secretKey}`)
+        .then(res => res.json())
+        .then(
+          (response) => {
+            this.setState({ articleData: response });
+          },
+          (error) => {
+            this.setState({ error });
+          },
+        );
+    }
+  }
+
+  render() {
+    const { articleData, error } = this.state;
+
+    if (error) {
+      return (
+        <div>
+Error
+        </div>
+      );
+    }
+
+    if (!articleData.title) {
+      return false;
+    }
+
+    return (
+      <Article>
+        {articleData.image && <ArticleImg src={articleData.image} />}
+        <ArticleContent>
+          <ArticleTitle>
+            {articleData.title}
+          </ArticleTitle>
+          <ArticleText>
+            {articleData.description}
+          </ArticleText>
+          <ArticleLink href={articleData.url}>
+            {articleData.url}
+          </ArticleLink>
+        </ArticleContent>
+      </Article>
+    );
+  }
+}
+
 function Tweet(props) {
   const {
     pinned,
+    tweetId,
     avatar,
     author,
     authorName,
@@ -213,12 +282,12 @@ function Tweet(props) {
     bigText,
     text,
     image,
-    article,
     comments,
     retweet,
     loves,
     envelope,
   } = props;
+
   return (
     <StTweet>
       {pinned && <Pinned />}
@@ -234,9 +303,16 @@ function Tweet(props) {
           <AuthorName>
             {authorName}
           </AuthorName>
-          <Date>
-            {date}
-          </Date>
+          <TweetDate>
+            {new Date(date).toLocaleString(
+              'en-US',
+              {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              },
+            )}
+          </TweetDate>
         </div>
 
         {bigText && (
@@ -246,29 +322,16 @@ function Tweet(props) {
         )}
 
         {text && (
-        <Text>
-          {text}
-        </Text>
+          <Text
+            dangerouslySetInnerHTML={{
+              __html: text,
+            }}
+          />
         )}
 
         {image && <Image src={image} />}
 
-        {article && (
-          <Article>
-            <ArticleImg src={article.img} />
-            <ArticleContent>
-              <ArticleTitle>
-                {article.title}
-              </ArticleTitle>
-              <ArticleText>
-                {article.text}
-              </ArticleText>
-              <ArticleLink>
-                {article.link}
-              </ArticleLink>
-            </ArticleContent>
-          </Article>
-        )}
+        <ArticleTweet id={tweetId} />
 
         <ActionList>
           <Action>

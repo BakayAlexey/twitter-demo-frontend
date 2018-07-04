@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import styled from 'styled-components';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Bar from './Bar';
 import InfoProfile from './InfoProfile';
 import Followers from './Followers';
@@ -86,7 +86,7 @@ lists
                 render={() => (
                   <Fragment>
                     <Col md={6}>
-                      <Tweets id={userData.id} />
+                      <Tweets key={userData.id} id={userData.id} />
                     </Col>
                     <Col md={3}>
                       <Follows />
@@ -104,4 +104,4 @@ lists
   );
 }
 
-export default withRouter(Main);
+export default Main;
