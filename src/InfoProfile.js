@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import tick from './icons/tick.svg';
 import iconLocation from './icons/icon-location.svg';
 import iconLink from './icons/icon-link.svg';
@@ -72,7 +72,7 @@ const Follows = styled(Link)`
   }
 `;
 
-const Description = styled.p`
+const Description = styled.div`
   font-size: 14px;
   line-height: 20px;
   color: 14171a;
@@ -153,58 +153,65 @@ const Button = styled.button`
   }
 `;
 
-const InfoProfile = withRouter(({ match: { params: { username } } }) => (
-  <StInfoProfile>
-    <AvatarWrap>
-      <Avatar src={`${process.env.PUBLIC_URL}/img/avatar-big.png`} alt="profile_image" />
-    </AvatarWrap>
-    <div>
-      <Name>
-        {username}
-      </Name>
-      <Verified src={tick} alt="verified" />
-    </div>
-    <div>
-      <NameLink to="EveryInteract">
-        @
-        {username}
-      </NameLink>
-      <Follows to="/followers">
+function InfoProfile({ userData }) {
+  return (
+    <StInfoProfile>
+      <AvatarWrap>
+        <Avatar src={`${process.env.PUBLIC_URL}/img/avatar-big.png`} alt="profile_image" />
+      </AvatarWrap>
+      <div>
+        <Name>
+          {userData.display_name}
+        </Name>
+        {!userData.bot && <Verified src={tick} alt="verified" />}
+      </div>
+      <div>
+        <NameLink to="EveryInteract">
+          {`@${userData.username}`}
+        </NameLink>
+        <Follows to="/followers">
 Follows you
-      </Follows>
-    </div>
-    <Description>
-      UX Design studio focussed problem solving creativity. Design to us is how can we make things
-      *work* amazing.
-    </Description>
-    <Location>
-      <Img src={iconLocation} alt="location" />
-      <span>
-London, UK
-        {' '}
-      </span>
-    </Location>
-    <LinkSite>
-      <Img src={iconLink} alt="link site" />
-      <a href="everyinteraction.com">
-everyinteraction.com
-      </a>
-    </LinkSite>
-    <Joined>
-      <Img src={iconJoined} alt="joined" />
-      <span>
-Joined May 2008
-      </span>
-    </Joined>
-    <BtnGroup>
-      <Button>
+        </Follows>
+      </div>
+      <Description
+        dangerouslySetInnerHTML={{
+          __html: userData.note,
+        }}
+      />
+      <Location>
+        <Img src={iconLocation} alt="location" />
+        <span>
+          {userData.location}
+        </span>
+      </Location>
+      <LinkSite>
+        <Img src={iconLink} alt="link site" />
+        <a href={userData.url}>
+          {userData.url}
+        </a>
+      </LinkSite>
+      <Joined>
+        <Img src={iconJoined} alt="joined" />
+        <span>
+          {`Joined ${new Date(userData.created_at).toLocaleString(
+            'en-US',
+            {
+              year: 'numeric',
+              month: 'long',
+            },
+          )}`}
+        </span>
+      </Joined>
+      <BtnGroup>
+        <Button>
 Tweet to
-      </Button>
-      <Button>
+        </Button>
+        <Button>
 Message
-      </Button>
-    </BtnGroup>
-  </StInfoProfile>
-));
+        </Button>
+      </BtnGroup>
+    </StInfoProfile>
+  );
+}
 
 export default InfoProfile;

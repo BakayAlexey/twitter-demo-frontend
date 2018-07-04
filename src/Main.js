@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import styled from 'styled-components';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import Bar from './Bar';
 import InfoProfile from './InfoProfile';
 import Followers from './Followers';
@@ -25,16 +25,17 @@ const ProfileContent = styled.div`
   background-color: #e6ecf0;
 `;
 
-function Main({ match }) {
+function Main(props) {
+  const { match, userData } = props;
   return (
     <main>
-      <ProfileImg src={`${process.env.PUBLIC_URL}/img/profile-image.jpg`} alt="profile_image" />
+      <ProfileImg src={userData.header_static} alt="profile_image" />
       <Bar />
       <ProfileContent>
         <Grid>
           <Row>
             <Col md={3}>
-              <InfoProfile />
+              <InfoProfile userData={userData} />
               <Followers />
               <Galleries />
             </Col>
@@ -85,7 +86,7 @@ lists
                 render={() => (
                   <Fragment>
                     <Col md={6}>
-                      <Tweets />
+                      <Tweets id={userData.id} />
                     </Col>
                     <Col md={3}>
                       <Follows />
@@ -103,4 +104,4 @@ lists
   );
 }
 
-export default Main;
+export default withRouter(Main);

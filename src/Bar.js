@@ -118,9 +118,17 @@ const navData = {
   amountLists: 2,
 };
 
+const isActiveLinkTweets = (match, location) => {
+  if (!match) {
+    return false;
+  }
+  const matches = [`${match.url}`, `${match.url}/tweets-replies`, `${match.url}/media`];
+  return matches.includes(location.pathname);
+};
+
 const Statistics = withRouter(({ match }) => (
   <Nav>
-    <StLink to={`${match.url}`} exact>
+    <StLink to={`${match.url}`} isActive={isActiveLinkTweets}>
       <Name>
 Tweets
       </Name>

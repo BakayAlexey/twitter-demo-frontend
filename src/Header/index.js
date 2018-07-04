@@ -51,7 +51,7 @@ const ButtonTweet = styled.button`
   }
 `;
 
-function Header() {
+function Header({ avatar }) {
   return (
     <header>
       <Grid>
@@ -62,7 +62,7 @@ function Header() {
           </Logo>
           <SearchForm />
           <Avatar>
-            <Img src={`${process.env.PUBLIC_URL}/img/avatar-small.png`} alt="Avatar" />
+            <Img src={avatar} alt="Avatar" />
           </Avatar>
           <ButtonTweet>
 Tweet
