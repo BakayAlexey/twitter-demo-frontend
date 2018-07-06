@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import { Helmet } from 'react-helmet';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router, Switch, Route, Redirect,
+} from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import ProfilePage from './ProfilePage';
 
@@ -22,11 +24,12 @@ Twitter
       <IntlProvider locale="en">
         <Router>
           <Switch>
+            <Redirect from="/" to="/1" exact />
             <Route
               path="/:direction(about|help-center|terms|privacy-policy|cookies|ads-info)"
               component={StaticPages}
             />
-            <Route path="/" component={ProfilePage} />
+            <Route path="/:id" component={ProfilePage} />
           </Switch>
         </Router>
       </IntlProvider>

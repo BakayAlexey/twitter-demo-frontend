@@ -34,14 +34,10 @@ const LinkStyled = styled(NavLink)`
 const List = styled.div``;
 
 class Tweets extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      tweetsData: [],
-      error: null,
-    };
-  }
+  state = {
+    tweetsData: [],
+    error: null,
+  };
 
   componentDidMount() {
     const { id } = this.props;
@@ -53,9 +49,8 @@ class Tweets extends Component {
       fetch(`${hostname}/api/v1/accounts/${id}/statuses?access_token=${secretKey}`)
         .then(res => res.json())
         .then(
-          (response) => {
-            console.log(response);
-            this.setState({ tweetsData: response });
+          (tweetsData) => {
+            this.setState({ tweetsData });
           },
           (error) => {
             this.setState({ error });
@@ -94,11 +89,11 @@ No tweets
         authorName={`@${tweet.account.username}`}
         date={tweet.created_at}
         text={tweet.content}
-        bigText={tweet.bigText}
-        image={tweet.media_attachments.length > 0 && tweet.media_attachments[0].url}
+        // bigText={tweet.bigText}
+        images={tweet.media_attachments}
         comments={tweet.comments}
-        retweet={tweet.retweet}
-        loves={tweet.loves}
+        retweet={tweet.reblogs_count}
+        loves={tweet.favourites_count}
         envelope={tweet.envelope}
       />
     ));

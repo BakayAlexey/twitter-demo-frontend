@@ -107,6 +107,10 @@ const TextBig = styled.div`
   color: #292f33;
   a {
     color: #1da1f2;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -116,6 +120,13 @@ const Text = styled.div`
   font-weight: normal;
   line-height: 22px;
   color: #292f33;
+  a {
+    color: #1da1f2;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 const Image = styled.img`
@@ -208,14 +219,10 @@ Pinned Tweet
 }
 
 class ArticleTweet extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      articleData: {},
-      error: null,
-    };
-  }
+  state = {
+    articleData: {},
+    error: null,
+  };
 
   componentDidMount() {
     const { id } = this.props;
@@ -227,8 +234,8 @@ class ArticleTweet extends Component {
       fetch(`${hostname}/api/v1/statuses/${id}/card?access_token=${secretKey}`)
         .then(res => res.json())
         .then(
-          (response) => {
-            this.setState({ articleData: response });
+          (articleData) => {
+            this.setState({ articleData });
           },
           (error) => {
             this.setState({ error });
@@ -279,9 +286,8 @@ function Tweet(props) {
     author,
     authorName,
     date,
-    bigText,
     text,
-    image,
+    images,
     comments,
     retweet,
     loves,
@@ -315,21 +321,13 @@ function Tweet(props) {
           </TweetDate>
         </div>
 
-        {bigText && (
-        <TextBig>
-          {bigText}
-        </TextBig>
+        {text && (text.length > 120 ? (
+          <Text dangerouslySetInnerHTML={{ __html: text }} />
+        ) : (
+          <TextBig dangerouslySetInnerHTML={{ __html: text }} />)
         )}
 
-        {text && (
-          <Text
-            dangerouslySetInnerHTML={{
-              __html: text,
-            }}
-          />
-        )}
-
-        {image && <Image src={image} />}
+        {images && images.length > 0 && images.map(img => <Image key={img.id} src={img.url} />)}
 
         <ArticleTweet id={tweetId} />
 

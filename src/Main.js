@@ -86,7 +86,7 @@ lists
                 render={() => (
                   <Fragment>
                     <Col md={6}>
-                      <Tweets key={userData.id} id={userData.id} />
+                      <Tweets id={userData.id} />
                     </Col>
                     <Col md={3}>
                       <Follows />

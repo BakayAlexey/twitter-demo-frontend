@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Helmet } from 'react-helmet';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 
@@ -35,14 +35,20 @@ class ProfilePage extends Component {
   };
 
   componentDidMount() {
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
+
     const hostname = 'https://twitter-demo.erodionov.ru';
     const secretKey = process.env.REACT_APP_KEY;
 
-    fetch(`${hostname}/api/v1/accounts/1?access_token=${secretKey}`)
+    fetch(`${hostname}/api/v1/accounts/${id}?access_token=${secretKey}`)
       .then(res => res.json())
       .then(
-        (response) => {
-          this.setState({ userData: response });
+        (userData) => {
+          this.setState({ userData, error: null });
         },
         (error) => {
           this.setState({ error });
@@ -53,7 +59,7 @@ class ProfilePage extends Component {
   render() {
     const { userData, error } = this.state;
 
-    if (error) {
+    if (error || userData.error) {
       return (
         <div>
 Error
@@ -71,11 +77,10 @@ Twitter - Profile
         </Helmet>
         <Header />
         <Switch>
-          <Redirect from="/" to="/admin" exact />
           <Route path="/moments" component={Moments} />
           <Route path="/notifications" component={Notifications} />
           <Route path="/messages" component={Messages} />
-          <Route path="/:username" render={props => <Main {...props} userData={userData} />} />
+          <Route path={`/${userData.id}`} render={props => <Main {...props} userData={userData} />} />
         </Switch>
       </Fragment>
     );
