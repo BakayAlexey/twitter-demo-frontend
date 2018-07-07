@@ -29,7 +29,10 @@ Twitter
               path="/:direction(about|help-center|terms|privacy-policy|cookies|ads-info)"
               component={StaticPages}
             />
-            <Route path="/:id" component={ProfilePage} />
+            <Route
+              path="/:id"
+              render={props => <ProfilePage {...props} key={props.match.params.id} />}
+            />
           </Switch>
         </Router>
       </IntlProvider>

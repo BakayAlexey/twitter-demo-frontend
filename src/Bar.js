@@ -119,9 +119,6 @@ const navData = {
 };
 
 const isActiveLinkTweets = (match, location) => {
-  if (!match) {
-    return false;
-  }
   const matches = [`${match.url}`, `${match.url}/tweets-replies`, `${match.url}/media`];
   return matches.includes(location.pathname);
 };

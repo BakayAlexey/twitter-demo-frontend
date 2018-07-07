@@ -89,7 +89,6 @@ No tweets
         authorName={`@${tweet.account.username}`}
         date={tweet.created_at}
         text={tweet.content}
-        // bigText={tweet.bigText}
         images={tweet.media_attachments}
         comments={tweet.comments}
         retweet={tweet.reblogs_count}
@@ -116,19 +115,14 @@ Media
           <Switch>
             <Route
               path={`${match.url}/tweets-replies`}
-              render={() => (
-                <h2>
-tweets-replies
-                </h2>
-              )}
+              render={() => tweetsList.filter(tweet => tweet)}
             />
             <Route
               path={`${match.url}/media`}
-              render={() => (
-                <h2>
-media
-                </h2>
-              )}
+              render={() => tweetsList.filter(
+                tweet => tweet.props.images.length > 0 || tweet.props.text.indexOf('href') !== -1,
+              )
+              }
             />
             <Route path={`${match.url}`} render={() => tweetsList} />
           </Switch>

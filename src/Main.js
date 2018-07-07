@@ -36,7 +36,7 @@ function Main(props) {
           <Row>
             <Col md={3}>
               <InfoProfile userData={userData} />
-              <Followers />
+              <Followers id={userData.id} />
               <Galleries />
             </Col>
 

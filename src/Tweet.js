@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import Preview from './Preview';
 import iconPinned from './icons/icon-pinned.svg';
 import iconLoves from './icons/icon-loves.svg';
 import iconComments from './icons/icon-comments.svg';
@@ -135,51 +136,6 @@ const Image = styled.img`
   margin-bottom: 10px;
 `;
 
-const Article = styled.div`
-  display: flex;
-  margin-bottom: 10px;
-  border: 1px solid #e1e8ed;
-  border-radius: 4px;
-  overflow: hidden;
-`;
-
-const ArticleImg = styled.img`
-  display: block;
-  flex-shrink: 0;
-  width: 126px;
-  height: 126px;
-`;
-
-const ArticleContent = styled.div`
-  flex-grow: 1;
-  padding: 0 8px;
-  font-size: 15px;
-  font-weight: normal;
-  line-height: 22px;
-  color: #000000;
-`;
-
-const ArticleTitle = styled.div`
-  margin-bottom: 3px;
-  font-weight: bold;
-`;
-
-const ArticleText = styled.div`
-  font-size: 15px;
-  font-weight: normal;
-  line-height: 18px;
-  color: #000000;
-`;
-
-const ArticleLink = styled.a`
-  display: block;
-  color: #667580;
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
 const ActionList = styled.div`
   display: flex;
   align-items: center;
@@ -216,66 +172,6 @@ Pinned Tweet
       </PinnedDescr>
     </StPinned>
   );
-}
-
-class ArticleTweet extends Component {
-  state = {
-    articleData: {},
-    error: null,
-  };
-
-  componentDidMount() {
-    const { id } = this.props;
-
-    if (id) {
-      const hostname = 'https://twitter-demo.erodionov.ru';
-      const secretKey = process.env.REACT_APP_KEY;
-
-      fetch(`${hostname}/api/v1/statuses/${id}/card?access_token=${secretKey}`)
-        .then(res => res.json())
-        .then(
-          (articleData) => {
-            this.setState({ articleData });
-          },
-          (error) => {
-            this.setState({ error });
-          },
-        );
-    }
-  }
-
-  render() {
-    const { articleData, error } = this.state;
-
-    if (error) {
-      return (
-        <div>
-Error
-        </div>
-      );
-    }
-
-    if (!articleData.title) {
-      return false;
-    }
-
-    return (
-      <Article>
-        {articleData.image && <ArticleImg src={articleData.image} />}
-        <ArticleContent>
-          <ArticleTitle>
-            {articleData.title}
-          </ArticleTitle>
-          <ArticleText>
-            {articleData.description}
-          </ArticleText>
-          <ArticleLink href={articleData.url}>
-            {articleData.url}
-          </ArticleLink>
-        </ArticleContent>
-      </Article>
-    );
-  }
 }
 
 function Tweet(props) {
@@ -321,15 +217,16 @@ function Tweet(props) {
           </TweetDate>
         </div>
 
-        {text && (text.length > 120 ? (
-          <Text dangerouslySetInnerHTML={{ __html: text }} />
-        ) : (
-          <TextBig dangerouslySetInnerHTML={{ __html: text }} />)
-        )}
+        {text
+          && (text.length > 120 ? (
+            <Text dangerouslySetInnerHTML={{ __html: text }} />
+          ) : (
+            <TextBig dangerouslySetInnerHTML={{ __html: text }} />
+          ))}
 
         {images && images.length > 0 && images.map(img => <Image key={img.id} src={img.url} />)}
 
-        <ArticleTweet id={tweetId} />
+        <Preview id={tweetId} />
 
         <ActionList>
           <Action>

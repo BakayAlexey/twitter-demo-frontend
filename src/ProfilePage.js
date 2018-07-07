@@ -48,7 +48,7 @@ class ProfilePage extends Component {
       .then(res => res.json())
       .then(
         (userData) => {
-          this.setState({ userData, error: null });
+          this.setState({ userData });
         },
         (error) => {
           this.setState({ error });
@@ -80,7 +80,10 @@ Twitter - Profile
           <Route path="/moments" component={Moments} />
           <Route path="/notifications" component={Notifications} />
           <Route path="/messages" component={Messages} />
-          <Route path={`/${userData.id}`} render={props => <Main {...props} userData={userData} />} />
+          <Route
+            path={`/${userData.id}`}
+            render={props => <Main {...props} userData={userData} />}
+          />
         </Switch>
       </Fragment>
     );
