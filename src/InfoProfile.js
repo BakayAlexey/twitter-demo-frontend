@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -153,21 +155,32 @@ const Button = styled.button`
   }
 `;
 
-function InfoProfile({ userData }) {
+function InfoProfile({
+  userData: {
+    avatar_static: avatarStatic,
+    display_name: displayName,
+    bot,
+    username,
+    note,
+    location,
+    url,
+    created_at: createdAt,
+  },
+}) {
   return (
     <StInfoProfile>
       <AvatarWrap>
-        <Avatar src={userData.avatar_static} alt="profile_image" />
+        <Avatar src={avatarStatic} alt="profile_image" />
       </AvatarWrap>
       <div>
         <Name>
-          {userData.display_name}
+          {displayName}
         </Name>
-        {!userData.bot && <Verified src={tick} alt="verified" />}
+        {!bot && <Verified src={tick} alt="verified" />}
       </div>
       <div>
         <NameLink to="EveryInteract">
-          {`@${userData.username}`}
+          {`@${username}`}
         </NameLink>
         <Follows to="/followers">
 Follows you
@@ -175,25 +188,25 @@ Follows you
       </div>
       <Description
         dangerouslySetInnerHTML={{
-          __html: userData.note,
+          __html: note,
         }}
       />
       <Location>
         <Img src={iconLocation} alt="location" />
         <span>
-          {userData.location}
+          {location}
         </span>
       </Location>
       <LinkSite>
         <Img src={iconLink} alt="link site" />
-        <a href={userData.url}>
-          {userData.url}
+        <a href={url}>
+          {url}
         </a>
       </LinkSite>
       <Joined>
         <Img src={iconJoined} alt="joined" />
         <span>
-          {`Joined ${new Date(userData.created_at).toLocaleString(
+          {`Joined ${new Date(createdAt).toLocaleString(
             'en-US',
             {
               year: 'numeric',
