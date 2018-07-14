@@ -155,6 +155,20 @@ const Button = styled.button`
   }
 `;
 
+type UserData = {
+  avatar_static: string,
+  display_name: string,
+  bot: boolean,
+  username: string,
+  note: string,
+  url: string,
+  created_at: string,
+}
+
+type Props = {
+  userData: UserData
+}
+
 function InfoProfile({
   userData: {
     avatar_static: avatarStatic,
@@ -162,11 +176,10 @@ function InfoProfile({
     bot,
     username,
     note,
-    location,
     url,
     created_at: createdAt,
   },
-}) {
+}: Props) {
   return (
     <StInfoProfile>
       <AvatarWrap>
@@ -194,7 +207,7 @@ Follows you
       <Location>
         <Img src={iconLocation} alt="location" />
         <span>
-          {location}
+          any place of  the world
         </span>
       </Location>
       <LinkSite>

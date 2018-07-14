@@ -9,8 +9,6 @@
 # production
 /build
 
-/flow-typed
-
 # misc
 .DS_Store
 .env
@@ -22,3 +20,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/flow-typed
+/.idea

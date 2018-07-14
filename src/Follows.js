@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -212,30 +214,32 @@ function FollowUser(props) {
         </NameLink>
       </UserData>
       <Button to={`/${name}`}>
-Follow
+        Follow
       </Button>
     </StFollowUser>
   );
 }
 
 function Follows() {
-  const followsData = [
+  const publicUrl = process.env.PUBLIC_URL;
+  if (!publicUrl && publicUrl !== '') throw new Error('Missing PUBLIC_URL');
+  const followsData: Array<Object> = [
     {
-      img: `${process.env.PUBLIC_URL}/img/follow1.jpg`,
+      img: `${publicUrl}/img/follow1.jpg`,
       imgDescr: 'img descr',
       verified: false,
       name: 'AppleInsider',
       nameLink: '@appleinsider',
     },
     {
-      img: `${process.env.PUBLIC_URL}/img/follow2.jpg`,
+      img: `${publicUrl}/img/follow2.jpg`,
       imgDescr: 'img descr',
       verified: true,
       name: 'Creode',
       nameLink: '@Creode',
     },
     {
-      img: `${process.env.PUBLIC_URL}/img/follow3.jpg`,
+      img: `${publicUrl}/img/follow3.jpg`,
       imgDescr: 'img descr',
       verified: false,
       name: 'Epiphany Search',
@@ -258,19 +262,19 @@ function Follows() {
     <StFollows>
       <Head>
         <Title to="/followers">
-Who to follow
+          Who to follow
         </Title>
         <Small>
-·
+          ·
         </Small>
         <BtnRefresh>
-Refresh
+          Refresh
         </BtnRefresh>
         <Small>
-·
+          ·
         </Small>
         <LinkViewAll to="/viewAll">
-View all
+          View all
         </LinkViewAll>
       </Head>
       <FollowsList>
@@ -280,7 +284,7 @@ View all
       <FindUsers>
         <Icon src={iconPeople} />
         <FindLink to="/findPeople">
-Find people you know
+          Find people you know
         </FindLink>
       </FindUsers>
     </StFollows>

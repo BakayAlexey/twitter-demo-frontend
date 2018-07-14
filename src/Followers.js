@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -58,9 +60,24 @@ function Follower(props) {
   );
 }
 
-class Followers extends Component {
+type Props = {
+  id: string,
+};
+
+type FollowersData = {
+  id: string,
+  avatar_static: string,
+  username: string,
+}
+
+type State = {
+  followersData: null | Array<FollowersData>| Object,
+  error: null | Object,
+};
+
+class Followers extends Component<Props, State> {
   state = {
-    followersData: [],
+    followersData: null,
     error: null,
   };
 
@@ -69,6 +86,7 @@ class Followers extends Component {
 
     const hostname = 'https://twitter-demo.erodionov.ru';
     const secretKey = process.env.REACT_APP_KEY;
+    if (!secretKey) throw new Error('Missing REACT_APP_KEY');
 
     fetch(`${hostname}/api/v1/accounts/${id}/followers?access_token=${secretKey}`)
       .then(res => res.json())
@@ -85,10 +103,18 @@ class Followers extends Component {
   render() {
     const { followersData, error } = this.state;
 
-    if (error || followersData.error) {
+    if (!followersData) {
       return (
         <div>
-Error
+          No followers
+        </div>
+      );
+    }
+
+    if (error || (followersData && followersData.error)) {
+      return (
+        <div>
+          Error
         </div>
       );
     }
@@ -96,7 +122,7 @@ Error
     if (followersData.length === 0) {
       return (
         <div>
-Followers list is empty
+          Followers list is empty
         </div>
       );
     }
@@ -115,7 +141,7 @@ Followers list is empty
         <Head>
           <Icon src={iconFollowers} alt="followers" />
           <Title to="/followers">
-6 Followers you know
+            6 Followers you know
           </Title>
         </Head>
 

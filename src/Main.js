@@ -1,7 +1,10 @@
+// @flow
+
 import React, { Fragment } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import styled from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
+import type { Match } from 'react-router-dom';
 import Bar from './Bar';
 import InfoProfile from './InfoProfile';
 import Followers from './Followers';
@@ -25,7 +28,32 @@ const ProfileContent = styled.div`
   background-color: #e6ecf0;
 `;
 
-function Main(props) {
+type UserData = {
+  id: string,
+  username: string,
+  acct: string,
+  display_name: string,
+  locked: boolean,
+  bot: boolean,
+  created_at: string,
+  note: string,
+  url: string,
+  avatar: string,
+  avatar_static: string,
+  header: string,
+  header_static: string,
+  followers_count: number,
+  following_count: number,
+  statuses_count: number,
+  error?: string,
+};
+
+type Props = {
+  match: Match,
+  userData: UserData,
+};
+
+function Main(props: Props) {
   const { match, userData } = props;
   return (
     <main>
@@ -46,7 +74,7 @@ function Main(props) {
                 render={() => (
                   <Col md={9}>
                     <h2>
-following
+                      following
                     </h2>
                   </Col>
                 )}
@@ -56,7 +84,7 @@ following
                 render={() => (
                   <Col md={9}>
                     <h2>
-followers
+                      followers
                     </h2>
                   </Col>
                 )}
@@ -66,7 +94,7 @@ followers
                 render={() => (
                   <Col md={9}>
                     <h2>
-likes
+                      likes
                     </h2>
                   </Col>
                 )}
@@ -76,7 +104,7 @@ likes
                 render={() => (
                   <Col md={9}>
                     <h2>
-lists
+                      lists
                     </h2>
                   </Col>
                 )}
