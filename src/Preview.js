@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
@@ -46,7 +48,16 @@ const StLink = styled.a`
   }
 `;
 
-class Preview extends Component {
+type Props = {
+  id: string,
+};
+
+type State = {
+  previewData: Object,
+  error: null | Object,
+};
+
+class Preview extends Component<Props, State> {
   state = {
     previewData: {},
     error: null,
@@ -58,6 +69,7 @@ class Preview extends Component {
     if (id) {
       const hostname = 'https://twitter-demo.erodionov.ru';
       const secretKey = process.env.REACT_APP_KEY;
+      if (!secretKey) throw new Error('Missing REACT_APP_KEY');
 
       fetch(`${hostname}/api/v1/statuses/${id}/card?access_token=${secretKey}`)
         .then(res => res.json())
@@ -78,7 +90,7 @@ class Preview extends Component {
     if (error) {
       return (
         <div>
-Error
+          Error
         </div>
       );
     }

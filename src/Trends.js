@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -102,9 +104,9 @@ function Trend(props) {
         </Stats>
       )}
       {description && (
-      <Description>
-        {description}
-      </Description>
+        <Description>
+          {description}
+        </Description>
       )}
     </StTrend>
   );
@@ -157,13 +159,13 @@ function Trends() {
     <StTrends>
       <Head>
         <Title>
-United Kingdom Trends
+          United Kingdom Trends
         </Title>
         <Small>
-·
+          ·
         </Small>
         <Change to="/change">
-Change
+          Change
         </Change>
       </Head>
       <TrendsList>

@@ -1,13 +1,16 @@
+// @flow
+
 import React, { Component, Fragment } from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
+import type { Match } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 
 function Moments() {
   return (
     <h2>
-Moments
+      Moments
     </h2>
   );
 }
@@ -15,7 +18,7 @@ Moments
 function Notifications() {
   return (
     <h2>
-Notifications
+      Notifications
     </h2>
   );
 }
@@ -23,14 +26,43 @@ Notifications
 function Messages() {
   return (
     <h2>
-Messages
+      Messages
     </h2>
   );
 }
 
-class ProfilePage extends Component {
+type Props = {
+  match: Match,
+}
+
+type UserData = {
+  id: string,
+  username: string,
+  acct: string,
+  display_name: string,
+  locked: boolean,
+  bot: boolean,
+  created_at: string,
+  note: string,
+  url: string,
+  avatar: string,
+  avatar_static: string,
+  header: string,
+  header_static: string,
+  followers_count: number,
+  following_count: number,
+  statuses_count: number,
+  error?: string,
+};
+
+type State = {
+  userData: ?UserData,
+  error: ?Object,
+};
+
+class ProfilePage extends Component<Props, State> {
   state = {
-    userData: {},
+    userData: null,
     error: null,
   };
 
@@ -43,6 +75,8 @@ class ProfilePage extends Component {
 
     const hostname = 'https://twitter-demo.erodionov.ru';
     const secretKey = process.env.REACT_APP_KEY;
+    if (!secretKey) throw new Error('Missing REACT_APP_KEY');
+    if (typeof id !== 'string') throw new Error('id invalid format');
 
     fetch(`${hostname}/api/v1/accounts/${id}?access_token=${secretKey}`)
       .then(res => res.json())
@@ -59,10 +93,18 @@ class ProfilePage extends Component {
   render() {
     const { userData, error } = this.state;
 
+    if (!userData) {
+      return (
+        <div>
+          No userData
+        </div>
+      );
+    }
+
     if (error || userData.error) {
       return (
         <div>
-Error
+          Error
         </div>
       );
     }
@@ -71,7 +113,7 @@ Error
       <Fragment>
         <Helmet>
           <title>
-Twitter - Profile
+            Twitter - Profile
           </title>
           <meta name="description" content="descr profile page" />
         </Helmet>

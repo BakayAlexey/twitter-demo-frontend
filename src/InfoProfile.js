@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -153,47 +155,72 @@ const Button = styled.button`
   }
 `;
 
-function InfoProfile({ userData }) {
+type UserData = {
+  avatar_static: string,
+  display_name: string,
+  bot: boolean,
+  username: string,
+  note: string,
+  url: string,
+  created_at: string,
+}
+
+type Props = {
+  userData: UserData
+}
+
+function InfoProfile(props: Props) {
+  const {
+    userData: {
+      avatar_static: avatarStatic,
+      display_name: displayName,
+      bot,
+      username,
+      note,
+      url,
+      created_at: createdAt,
+    },
+  } = props;
   return (
     <StInfoProfile>
       <AvatarWrap>
-        <Avatar src={userData.avatar_static} alt="profile_image" />
+        <Avatar src={avatarStatic} alt="profile_image" />
       </AvatarWrap>
       <div>
         <Name>
-          {userData.display_name}
+          {displayName}
         </Name>
-        {!userData.bot && <Verified src={tick} alt="verified" />}
+        {!bot && <Verified src={tick} alt="verified" />}
       </div>
       <div>
         <NameLink to="EveryInteract">
-          {`@${userData.username}`}
+          {`@${username}`}
         </NameLink>
         <Follows to="/followers">
-Follows you
+          Follows you
         </Follows>
       </div>
       <Description
         dangerouslySetInnerHTML={{
-          __html: userData.note,
+          __html: note,
         }}
       />
       <Location>
         <Img src={iconLocation} alt="location" />
         <span>
-          {userData.location}
+          any place of  the world
         </span>
       </Location>
       <LinkSite>
         <Img src={iconLink} alt="link site" />
-        <a href={userData.url}>
-          {userData.url}
+        <a href={url}>
+          {url}
         </a>
       </LinkSite>
       <Joined>
         <Img src={iconJoined} alt="joined" />
         <span>
-          {`Joined ${new Date(userData.created_at).toLocaleString(
+          {`Joined ${new Date(createdAt).toLocaleString(
             'en-US',
             {
               year: 'numeric',
@@ -204,10 +231,10 @@ Follows you
       </Joined>
       <BtnGroup>
         <Button>
-Tweet to
+          Tweet to
         </Button>
         <Button>
-Message
+          Message
         </Button>
       </BtnGroup>
     </StInfoProfile>

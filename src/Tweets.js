@@ -1,7 +1,10 @@
+// @flow
+
 import React, { Component } from 'react';
 import {
   NavLink, Route, Switch, withRouter,
 } from 'react-router-dom';
+import type { Match } from 'react-router-dom';
 import styled from 'styled-components';
 import Tweet from './Tweet';
 
@@ -33,7 +36,17 @@ const LinkStyled = styled(NavLink)`
 
 const List = styled.div``;
 
-class Tweets extends Component {
+type Props = {
+  id: string,
+  match: Match,
+}
+
+type State = {
+  tweetsData: Array<Object>,
+  error: null | Object,
+}
+
+class Tweets extends Component<Props, State> {
   state = {
     tweetsData: [],
     error: null,
@@ -45,6 +58,7 @@ class Tweets extends Component {
     if (id) {
       const hostname = 'https://twitter-demo.erodionov.ru';
       const secretKey = process.env.REACT_APP_KEY;
+      if (!secretKey) throw new Error('Missing REACT_APP_KEY');
 
       fetch(`${hostname}/api/v1/accounts/${id}/statuses?access_token=${secretKey}`)
         .then(res => res.json())
@@ -66,7 +80,7 @@ class Tweets extends Component {
     if (error) {
       return (
         <div>
-Error
+          Error
         </div>
       );
     }
@@ -74,7 +88,7 @@ Error
     if (tweetsData.length === 0) {
       return (
         <div>
-No tweets
+          No tweets
         </div>
       );
     }
@@ -104,10 +118,10 @@ No tweets
             Tweets
           </LinkStyled>
           <LinkStyled to={`${match.url}/tweets-replies`}>
-Tweets &amp; replies
+            Tweets &amp; replies
           </LinkStyled>
           <LinkStyled to={`${match.url}/media`}>
-Media
+            Media
           </LinkStyled>
         </Nav>
 
