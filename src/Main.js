@@ -25,17 +25,18 @@ const ProfileContent = styled.div`
   background-color: #e6ecf0;
 `;
 
-function Main({ match }) {
+function Main(props) {
+  const { match, userData } = props;
   return (
     <main>
-      <ProfileImg src={`${process.env.PUBLIC_URL}/img/profile-image.jpg`} alt="profile_image" />
+      <ProfileImg src={userData.header_static} alt="profile_image" />
       <Bar />
       <ProfileContent>
         <Grid>
           <Row>
             <Col md={3}>
-              <InfoProfile />
-              <Followers />
+              <InfoProfile userData={userData} />
+              <Followers id={userData.id} />
               <Galleries />
             </Col>
 
@@ -85,7 +86,7 @@ lists
                 render={() => (
                   <Fragment>
                     <Col md={6}>
-                      <Tweets />
+                      <Tweets id={userData.id} />
                     </Col>
                     <Col md={3}>
                       <Follows />

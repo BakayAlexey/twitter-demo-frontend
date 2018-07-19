@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   NavLink, Route, Switch, withRouter,
 } from 'react-router-dom';
@@ -33,123 +33,103 @@ const LinkStyled = styled(NavLink)`
 
 const List = styled.div``;
 
-const Tweets = withRouter(({ match }) => {
-  const TweetsData = [
-    {
-      pinned: true,
-      avatar: `${process.env.PUBLIC_URL}/img/avatar-small.png`,
-      author: 'Every Interaction',
-      authorName: '@EveryInteract',
-      date: '2 Mar 2015',
-      text: null,
-      bigText:
-        'We’ve made some more resources for all you wonderful #design folk everyinteraction.com/resources/ #webdesign #UI',
-      image: `${process.env.PUBLIC_URL}/img/tweet-img.jpg`,
-      article: null,
-      comments: 0,
-      retweet: 17,
-      loves: 47,
-      envelope: 0,
-    },
-    {
-      pinned: false,
-      avatar: `${process.env.PUBLIC_URL}/img/avatar-small.png`,
-      author: 'Every Interaction',
-      authorName: '@EveryInteract',
-      date: '23h',
-      srcImg: `${process.env.PUBLIC_URL}/img/tweet-img.jpg`,
-      text: null,
-      bigText:
-        'Our new website concept; Taking you from… @ Every Interaction instagram.com/p/BNFGrfhBP3M/',
-      image: null,
-      article: null,
-      comments: 1,
-      retweet: 4,
-      loves: 2,
-      envelope: 0,
-    },
-    {
-      pinned: false,
-      avatar: `${process.env.PUBLIC_URL}/img/avatar-small.png`,
-      author: 'Every Interaction',
-      authorName: '@EveryInteract',
-      date: 'Nov 18',
-      srcImg: `${process.env.PUBLIC_URL}/img/tweet-img.jpg`,
-      text:
-        'Variable web fonts are coming, and will open a world of opportunities for weight use online',
-      bigText: null,
-      image: null,
-      article: {
-        img: `${process.env.PUBLIC_URL}/img/tweet-article.jpg`,
-        title: 'The Future of Web Fonts',
-        text:
-          'We love typefaces. They give our sites and applications personalized feel. They convey the information and tell a story. They establish information hierarchy. But they’re…',
-        link: 'vilijamis.com',
-      },
-      comments: 0,
-      retweet: 0,
-      loves: 0,
-      envelope: 0,
-    },
-  ];
+class Tweets extends Component {
+  state = {
+    tweetsData: [],
+    error: null,
+  };
 
-  const tweetsList = TweetsData.map(tweet => (
-    <Tweet
-      key={Math.random()}
-      pinned={tweet.pinned}
-      avatar={tweet.avatar}
-      author={tweet.author}
-      authorName={tweet.authorName}
-      date={tweet.date}
-      srcImg={tweet.srcImg}
-      text={tweet.text}
-      bigText={tweet.bigText}
-      image={tweet.image}
-      article={tweet.article}
-      comments={tweet.comments}
-      retweet={tweet.retweet}
-      loves={tweet.loves}
-      envelope={tweet.envelope}
-    />
-  ));
+  componentDidMount() {
+    const { id } = this.props;
 
-  return (
-    <StTweets>
-      <Nav>
-        <LinkStyled to={`${match.url}`} exact>
-          Tweets
-        </LinkStyled>
-        <LinkStyled to={`${match.url}/tweets-replies`}>
+    if (id) {
+      const hostname = 'https://twitter-demo.erodionov.ru';
+      const secretKey = process.env.REACT_APP_KEY;
+
+      fetch(`${hostname}/api/v1/accounts/${id}/statuses?access_token=${secretKey}`)
+        .then(res => res.json())
+        .then(
+          (tweetsData) => {
+            this.setState({ tweetsData });
+          },
+          (error) => {
+            this.setState({ error });
+          },
+        );
+    }
+  }
+
+  render() {
+    const { match } = this.props;
+    const { tweetsData, error } = this.state;
+
+    if (error) {
+      return (
+        <div>
+Error
+        </div>
+      );
+    }
+
+    if (tweetsData.length === 0) {
+      return (
+        <div>
+No tweets
+        </div>
+      );
+    }
+
+    const tweetsList = tweetsData.map(tweet => (
+      <Tweet
+        key={tweet.id}
+        tweetId={tweet.id}
+        pinned={tweet.pinned}
+        avatar={tweet.account.avatar_static}
+        author={tweet.account.display_name}
+        authorName={`@${tweet.account.username}`}
+        date={tweet.created_at}
+        text={tweet.content}
+        images={tweet.media_attachments}
+        comments={tweet.comments}
+        retweet={tweet.reblogs_count}
+        loves={tweet.favourites_count}
+        envelope={tweet.envelope}
+      />
+    ));
+
+    return (
+      <StTweets>
+        <Nav>
+          <LinkStyled to={`${match.url}`} exact>
+            Tweets
+          </LinkStyled>
+          <LinkStyled to={`${match.url}/tweets-replies`}>
 Tweets &amp; replies
-        </LinkStyled>
-        <LinkStyled to={`${match.url}/media`}>
+          </LinkStyled>
+          <LinkStyled to={`${match.url}/media`}>
 Media
-        </LinkStyled>
-      </Nav>
+          </LinkStyled>
+        </Nav>
 
-      <List>
-        <Switch>
-          <Route
-            path={`${match.url}/tweets-replies`}
-            render={() => (
-              <h2>
-tweets-replies
-              </h2>
-            )}
-          />
-          <Route
-            path={`${match.url}/media`}
-            render={() => (
-              <h2>
-media
-              </h2>
-            )}
-          />
-          <Route path={`${match.url}`} render={() => tweetsList} />
-        </Switch>
-      </List>
-    </StTweets>
-  );
-});
+        <List>
+          <Switch>
+            <Route
+              path={`${match.url}/tweets-replies`}
+              render={() => tweetsList.filter(tweet => tweet)}
+            />
+            <Route
+              path={`${match.url}/media`}
+              render={() => tweetsList.filter(
+                tweet => tweet.props.images.length > 0 || tweet.props.text.indexOf('href') !== -1,
+              )
+              }
+            />
+            <Route path={`${match.url}`} render={() => tweetsList} />
+          </Switch>
+        </List>
+      </StTweets>
+    );
+  }
+}
 
-export default Tweets;
+export default withRouter(Tweets);

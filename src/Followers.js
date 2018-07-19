@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import iconFollowers from './icons/icon-followers.svg';
@@ -58,63 +58,73 @@ function Follower(props) {
   );
 }
 
-function Followers() {
-  const followersData = [
-    {
-      to: '/salahov30',
-      img: `${process.env.PUBLIC_URL}/img/followers1.jpg`,
-      description: 'followerDescr',
-    },
-    {
-      to: '/VonderVuflya‏',
-      img: `${process.env.PUBLIC_URL}/img/followers2.jpg`,
-      description: 'followerDescr',
-    },
-    {
-      to: '/noveltyshoe',
-      img: `${process.env.PUBLIC_URL}/img/followers3.jpg`,
-      description: 'followerDescr',
-    },
-    {
-      to: '/Artsalve',
-      img: `${process.env.PUBLIC_URL}/img/followers4.jpg`,
-      description: 'followerDescr',
-    },
-    {
-      to: '/aya_ulan',
-      img: `${process.env.PUBLIC_URL}/img/followers5.jpg`,
-      description: 'followerDescr',
-    },
-    {
-      to: '/lighthorsechris',
-      img: `${process.env.PUBLIC_URL}/img/followers6.jpg`,
-      description: 'followerDescr',
-    },
-  ];
+class Followers extends Component {
+  state = {
+    followersData: [],
+    error: null,
+  };
 
-  const followersList = followersData.map(follower => (
-    <Follower
-      key={Math.random()}
-      to={follower.to}
-      img={follower.img}
-      description={follower.description}
-    />
-  ));
+  componentDidMount() {
+    const { id } = this.props;
 
-  return (
-    <StFollowers>
-      <Head>
-        <Icon src={iconFollowers} alt="followers" />
-        <Title to="/followers">
+    const hostname = 'https://twitter-demo.erodionov.ru';
+    const secretKey = process.env.REACT_APP_KEY;
+
+    fetch(`${hostname}/api/v1/accounts/${id}/followers?access_token=${secretKey}`)
+      .then(res => res.json())
+      .then(
+        (followersData) => {
+          this.setState({ followersData });
+        },
+        (error) => {
+          this.setState({ error });
+        },
+      );
+  }
+
+  render() {
+    const { followersData, error } = this.state;
+
+    if (error || followersData.error) {
+      return (
+        <div>
+Error
+        </div>
+      );
+    }
+
+    if (followersData.length === 0) {
+      return (
+        <div>
+Followers list is empty
+        </div>
+      );
+    }
+
+    const followersList = followersData.map(follower => (
+      <Follower
+        key={follower.id}
+        to={`/${follower.id}`}
+        img={follower.avatar_static}
+        description={follower.username}
+      />
+    ));
+
+    return (
+      <StFollowers>
+        <Head>
+          <Icon src={iconFollowers} alt="followers" />
+          <Title to="/followers">
 6 Followers you know
-        </Title>
-      </Head>
+          </Title>
+        </Head>
 
-      <FollowersList>
-        {followersList}
-      </FollowersList>
-    </StFollowers>
-  );
+        <FollowersList>
+          {followersList}
+        </FollowersList>
+      </StFollowers>
+    );
+  }
 }
 
 export default Followers;

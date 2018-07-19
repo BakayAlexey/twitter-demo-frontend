@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Preview from './Preview';
 import iconPinned from './icons/icon-pinned.svg';
 import iconLoves from './icons/icon-loves.svg';
 import iconComments from './icons/icon-comments.svg';
@@ -39,7 +40,7 @@ const Body = styled.div`
 
 const Avatar = styled.div`
   position: absolute;
-  top: 0;
+  top: 12px;
   left: 15px;
   width: 41px;
   height: 41px;
@@ -74,7 +75,7 @@ const AuthorName = styled.div`
   text-decoration: none;
 `;
 
-const Date = styled.a`
+const TweetDate = styled.a`
   position: relative;
   display: inline-block;
   padding-left: 7px;
@@ -107,6 +108,10 @@ const TextBig = styled.div`
   color: #292f33;
   a {
     color: #1da1f2;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -116,53 +121,19 @@ const Text = styled.div`
   font-weight: normal;
   line-height: 22px;
   color: #292f33;
+  a {
+    color: #1da1f2;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 const Image = styled.img`
   display: block;
   width: 100%;
   margin-bottom: 10px;
-`;
-
-const Article = styled.div`
-  display: flex;
-  margin-bottom: 10px;
-  border: 1px solid #e1e8ed;
-  border-radius: 4px;
-  overflow: hidden;
-`;
-
-const ArticleImg = styled.img`
-  display: block;
-  flex-shrink: 0;
-  width: 126px;
-  height: 126px;
-`;
-
-const ArticleContent = styled.div`
-  flex-grow: 1;
-  padding: 0 8px;
-  font-size: 15px;
-  font-weight: normal;
-  line-height: 22px;
-  color: #000000;
-`;
-
-const ArticleTitle = styled.div`
-  margin-bottom: 3px;
-  font-weight: bold;
-`;
-
-const ArticleText = styled.div`
-  font-size: 15px;
-  font-weight: normal;
-  line-height: 18px;
-  color: #000000;
-`;
-
-const ArticleLink = styled.a`
-  display: block;
-  color: #667580;
 `;
 
 const ActionList = styled.div`
@@ -206,19 +177,19 @@ Pinned Tweet
 function Tweet(props) {
   const {
     pinned,
+    tweetId,
     avatar,
     author,
     authorName,
     date,
-    bigText,
     text,
-    image,
-    article,
+    images,
     comments,
     retweet,
     loves,
     envelope,
   } = props;
+
   return (
     <StTweet>
       {pinned && <Pinned />}
@@ -234,41 +205,28 @@ function Tweet(props) {
           <AuthorName>
             {authorName}
           </AuthorName>
-          <Date>
-            {date}
-          </Date>
+          <TweetDate>
+            {new Date(date).toLocaleString(
+              'en-US',
+              {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              },
+            )}
+          </TweetDate>
         </div>
 
-        {bigText && (
-        <TextBig>
-          {bigText}
-        </TextBig>
-        )}
+        {text
+          && (text.length > 120 ? (
+            <Text dangerouslySetInnerHTML={{ __html: text }} />
+          ) : (
+            <TextBig dangerouslySetInnerHTML={{ __html: text }} />
+          ))}
 
-        {text && (
-        <Text>
-          {text}
-        </Text>
-        )}
+        {images && images.length > 0 && images.map(img => <Image key={img.id} src={img.url} />)}
 
-        {image && <Image src={image} />}
-
-        {article && (
-          <Article>
-            <ArticleImg src={article.img} />
-            <ArticleContent>
-              <ArticleTitle>
-                {article.title}
-              </ArticleTitle>
-              <ArticleText>
-                {article.text}
-              </ArticleText>
-              <ArticleLink>
-                {article.link}
-              </ArticleLink>
-            </ArticleContent>
-          </Article>
-        )}
+        <Preview id={tweetId} />
 
         <ActionList>
           <Action>
