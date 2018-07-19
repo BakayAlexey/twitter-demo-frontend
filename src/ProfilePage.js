@@ -56,7 +56,7 @@ type UserData = {
 };
 
 type State = {
-  userData: null | UserData,
+  userData: ?UserData,
   error: ?Object,
 };
 

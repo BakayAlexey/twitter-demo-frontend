@@ -169,17 +169,18 @@ type Props = {
   userData: UserData
 }
 
-function InfoProfile({
-  userData: {
-    avatar_static: avatarStatic,
-    display_name: displayName,
-    bot,
-    username,
-    note,
-    url,
-    created_at: createdAt,
-  },
-}: Props) {
+function InfoProfile(props: Props) {
+  const {
+    userData: {
+      avatar_static: avatarStatic,
+      display_name: displayName,
+      bot,
+      username,
+      note,
+      url,
+      created_at: createdAt,
+    },
+  } = props;
   return (
     <StInfoProfile>
       <AvatarWrap>
@@ -196,7 +197,7 @@ function InfoProfile({
           {`@${username}`}
         </NameLink>
         <Follows to="/followers">
-Follows you
+          Follows you
         </Follows>
       </div>
       <Description
@@ -230,10 +231,10 @@ Follows you
       </Joined>
       <BtnGroup>
         <Button>
-Tweet to
+          Tweet to
         </Button>
         <Button>
-Message
+          Message
         </Button>
       </BtnGroup>
     </StInfoProfile>
