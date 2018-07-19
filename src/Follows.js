@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import tick from "./icons/tick.svg";
-import iconPeople from "./icons/icon-people.svg";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import tick from './icons/tick.svg';
+import iconPeople from './icons/icon-people.svg';
 
 const StFollows = styled.div`
   margin-bottom: 10px;
@@ -119,9 +119,9 @@ const NameLink = styled(Link)`
   }
 `;
 
-const Button = styled.button`
+const Button = styled(Link)`
   box-sizing: border-box;
-  display: block;
+  display: inline-block;
   padding: 6px 21px 5px 21px;
   background: none;
   border: 1px solid #1da1f2;
@@ -131,6 +131,7 @@ const Button = styled.button`
   font-weight: bold;
   color: #1da1f2;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
   &:hover {
     background-color: #e8f5fd;
@@ -150,7 +151,7 @@ const BtnClose = styled.button`
   cursor: pointer;
   &::before,
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     left: 50%;
     top: 50%;
@@ -192,59 +193,95 @@ const FindLink = styled(Link)`
 `;
 
 function FollowUser(props) {
+  const {
+    img, imgDescr, verified, name, nameLink,
+  } = props;
   return (
     <StFollowUser>
       <BtnClose />
       <AvatarWrap>
-        <Img src={props.img} alt={props.imgDescr} />
+        <Img src={img} alt={imgDescr} />
       </AvatarWrap>
       <UserData>
-        <Name>{props.name}</Name>
-        {props.verified && <Verified src={tick} alt="verified" />}
-        <NameLink to={"/" + props.nameLink}>{props.nameLink}</NameLink>
+        <Name>
+          {name}
+        </Name>
+        {verified && <Verified src={tick} alt="verified" />}
+        <NameLink to={`/${nameLink}`}>
+          {nameLink}
+        </NameLink>
       </UserData>
-      <Button>Follow</Button>
+      <Button to={`/${name}`}>
+Follow
+      </Button>
     </StFollowUser>
   );
 }
 
 function Follows() {
+  const followsData = [
+    {
+      img: `${process.env.PUBLIC_URL}/img/follow1.jpg`,
+      imgDescr: 'img descr',
+      verified: false,
+      name: 'AppleInsider',
+      nameLink: '@appleinsider',
+    },
+    {
+      img: `${process.env.PUBLIC_URL}/img/follow2.jpg`,
+      imgDescr: 'img descr',
+      verified: true,
+      name: 'Creode',
+      nameLink: '@Creode',
+    },
+    {
+      img: `${process.env.PUBLIC_URL}/img/follow3.jpg`,
+      imgDescr: 'img descr',
+      verified: false,
+      name: 'Epiphany Search',
+      nameLink: '@Epiphany Search',
+    },
+  ];
+
+  const followsList = followsData.map(user => (
+    <FollowUser
+      key={Math.random()}
+      img={user.img}
+      imgDescr={user.imgDescr}
+      verified={user.verified}
+      name={user.name}
+      nameLink={user.nameLink}
+    />
+  ));
+
   return (
     <StFollows>
       <Head>
-        <Title to="/followers">Who to follow</Title>
-        <Small>·</Small>
-        <BtnRefresh>Refresh</BtnRefresh>
-        <Small>·</Small>
-        <LinkViewAll to="/viewAll">View all</LinkViewAll>
+        <Title to="/followers">
+Who to follow
+        </Title>
+        <Small>
+·
+        </Small>
+        <BtnRefresh>
+Refresh
+        </BtnRefresh>
+        <Small>
+·
+        </Small>
+        <LinkViewAll to="/viewAll">
+View all
+        </LinkViewAll>
       </Head>
       <FollowsList>
-        <FollowUser
-          img={process.env.PUBLIC_URL + "/img/follow1.jpg"}
-          imgDescr="img descr"
-          verified={false}
-          name="AppleInsider"
-          nameLink="@appleinsider"
-        />
-        <FollowUser
-          img={process.env.PUBLIC_URL + "/img/follow2.jpg"}
-          imgDescr="img descr"
-          verified={true}
-          name="Creode"
-          nameLink="@Creode"
-        />
-        <FollowUser
-          img={process.env.PUBLIC_URL + "/img/follow3.jpg"}
-          imgDescr="img descr"
-          verified={false}
-          name="Epiphany Search"
-          nameLink="@Epiphany Search"
-        />
+        {followsList}
       </FollowsList>
 
       <FindUsers>
         <Icon src={iconPeople} />
-        <FindLink to="/findPeople">Find people you know</FindLink>
+        <FindLink to="/findPeople">
+Find people you know
+        </FindLink>
       </FindUsers>
     </StFollows>
   );

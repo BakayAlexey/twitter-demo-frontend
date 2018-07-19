@@ -1,9 +1,9 @@
-import React from "react";
-import { Grid } from "react-flexbox-grid";
-import MainNav from "./MainNav";
-import SearchForm from "./SearchForm";
-import iconLogo from "./twitter-logo.svg";
-import styled from "styled-components";
+import React from 'react';
+import { Grid } from 'react-flexbox-grid';
+import styled from 'styled-components';
+import MainNav from './MainNav';
+import SearchForm from './SearchForm';
+import iconLogo from './twitter-logo.svg';
 
 const HeaderContent = styled.div`
   position: relative;
@@ -62,12 +62,11 @@ function Header() {
           </Logo>
           <SearchForm />
           <Avatar>
-            <Img
-              src={process.env.PUBLIC_URL + "/img/avatar-small.png"}
-              alt="Avatar"
-            />
+            <Img src={`${process.env.PUBLIC_URL}/img/avatar-small.png`} alt="Avatar" />
           </Avatar>
-          <ButtonTweet>Tweet</ButtonTweet>
+          <ButtonTweet>
+Tweet
+          </ButtonTweet>
         </HeaderContent>
       </Grid>
     </header>

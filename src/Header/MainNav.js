@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import iconHome from "./icon-home.svg";
-import iconMoments from "./icon-moments.svg";
-import iconNotifications from "./icon-notifications.svg";
-import iconMessages from "./icon-messages.svg";
+import React from 'react';
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+import iconHome from './icon-home.svg';
+import iconMoments from './icon-moments.svg';
+import iconNotifications from './icon-notifications.svg';
+import iconMessages from './icon-messages.svg';
 
 const Nav = styled.nav`
   display: flex;
@@ -40,27 +40,33 @@ const LinkStyled = styled(NavLink)`
   }
 `;
 
-const MainNav = () => {
-  return (
-    <Nav>
-      <LinkStyled to="/">
-        <Icon src={iconHome} alt="Home" />
-        <Text>Home</Text>
-      </LinkStyled>
-      <LinkStyled to="/moments">
-        <Icon src={iconMoments} alt="Moments" />
-        <Text>Moments</Text>
-      </LinkStyled>
-      <LinkStyled to="/notifications">
-        <Icon src={iconNotifications} alt="Notifications" />
-        <Text>Notifications</Text>
-      </LinkStyled>
-      <LinkStyled to="/messages">
-        <Icon src={iconMessages} alt="Messages" />
-        <Text>Messages</Text>
-      </LinkStyled>
-    </Nav>
-  );
-};
+const MainNav = () => (
+  <Nav>
+    <LinkStyled to="/" exact>
+      <Icon src={iconHome} alt="Home" />
+      <Text>
+Home
+      </Text>
+    </LinkStyled>
+    <LinkStyled to="/moments">
+      <Icon src={iconMoments} alt="Moments" />
+      <Text>
+Moments
+      </Text>
+    </LinkStyled>
+    <LinkStyled to="/notifications">
+      <Icon src={iconNotifications} alt="Notifications" />
+      <Text>
+Notifications
+      </Text>
+    </LinkStyled>
+    <LinkStyled to="/messages">
+      <Icon src={iconMessages} alt="Messages" />
+      <Text>
+Messages
+      </Text>
+    </LinkStyled>
+  </Nav>
+);
 
 export default MainNav;

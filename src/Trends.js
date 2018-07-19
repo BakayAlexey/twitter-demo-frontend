@@ -1,6 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
 
 const StTrends = styled.div`
   box-sizing: border-box;
@@ -81,45 +82,92 @@ const Description = styled.div`
 
 function Trend(props) {
   const { name, stats, description } = props;
-  const getStatsDescr = () => {
-    if (stats > 10000) {
-      return (stats / 1000).toFixed(1) + "K Tweets";
-    } else if (stats => 1000) {
-      return (stats / 1000).toFixed(3).replace(".", ",") + " Tweets";
-    } else if (stats === 1) {
-      return "1 Tweet";
-    } else {
-      return stats + " Tweets";
-    }
-  };
 
   return (
     <StTrend>
-      <Name to={"/search?q=" + name}>{name}</Name>
-      {stats && <Stats>{getStatsDescr()}</Stats>}
-      {description && <Description>{description}</Description>}
+      <Name to={`/search?q=${name}`}>
+        {name}
+      </Name>
+      {stats && (
+        <Stats>
+          <FormattedMessage
+            id="tweets"
+            defaultMessage={
+              '{count, number} {count, plural, one {Tweet} other {Tweets}}'
+            }
+            values={{
+              count: stats,
+            }}
+          />
+        </Stats>
+      )}
+      {description && (
+      <Description>
+        {description}
+      </Description>
+      )}
     </StTrend>
   );
 }
 
 function Trends() {
+  const trendsData = [
+    {
+      name: '#BringYourDogToWorkDay',
+      description: null,
+      stats: null,
+    },
+    {
+      name: '#FridayFeeling',
+      description: null,
+      stats: 12121,
+    },
+    {
+      name: '#BrexitAnniversary',
+      description: 'It’s one year since the UK voted to leave the European Union',
+      stats: null,
+    },
+    {
+      name: 'HMS Queen Elizabeth',
+      description: null,
+      stats: 1036,
+    },
+    {
+      name: 'Joe Budden',
+      description: null,
+      stats: 1036,
+    },
+    {
+      name: 'Trident',
+      description: null,
+      stats: 6136,
+    },
+  ];
+
+  const trendsList = trendsData.map(trend => (
+    <Trend
+      key={Math.random()}
+      name={trend.name}
+      description={trend.description}
+      stats={trend.stats}
+    />
+  ));
+
   return (
     <StTrends>
       <Head>
-        <Title>United Kingdom Trends</Title>
-        <Small>·</Small>
-        <Change to="/change">Change</Change>
+        <Title>
+United Kingdom Trends
+        </Title>
+        <Small>
+·
+        </Small>
+        <Change to="/change">
+Change
+        </Change>
       </Head>
       <TrendsList>
-        <Trend name="#BringYourDogToWorkDay" />
-        <Trend name="#FridayFeeling" stats={12121} />
-        <Trend
-          name="#BrexitAnniversary"
-          description="It’s one year since the UK voted to leave the European Union"
-        />
-        <Trend name="HMS Queen Elizabeth" stats={1036} />
-        <Trend name="Joe Budden" stats={1036} />
-        <Trend name="Trident" stats={6136} />
+        {trendsList}
       </TrendsList>
     </StTrends>
   );

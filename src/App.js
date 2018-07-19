@@ -1,34 +1,43 @@
-import React, { Component, Fragment } from "react";
-import ProfilePage from "./ProfilePage";
-import { Helmet } from "react-helmet";
+import React, { Fragment } from 'react';
+import { Helmet } from 'react-helmet';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
-} from "react-router-dom";
+  BrowserRouter as Router, Switch, Route, Redirect,
+} from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
+import ProfilePage from './ProfilePage';
 
-class App extends Component {
-  render() {
-    return (
-      <Fragment>
-        <Helmet>
-          <title>Twitter</title>
-          <meta name="description" content="descr page" />
-        </Helmet>
+const StaticPages = ({ match }) => (
+  <h2>
+    {match.params.direction}
+  </h2>
+);
+
+function App() {
+  return (
+    <Fragment>
+      <Helmet>
+        <title>
+Twitter
+        </title>
+        <meta name="description" content="descr page" />
+      </Helmet>
+      <IntlProvider locale="en">
         <Router>
           <Switch>
-            <Redirect from="/" to="/EveryInteraction" exact />
-            <Route path="/EveryInteraction" component={ProfilePage} />
-            <Route path="/moments" component={ProfilePage} />
-            <Route path="/notifications" component={ProfilePage} />
-            <Route path="/messages" component={ProfilePage} />
-            <Route path="/tweets" component={ProfilePage} />
+            <Redirect from="/" to="/1" exact />
+            <Route
+              path="/:direction(about|help-center|terms|privacy-policy|cookies|ads-info)"
+              component={StaticPages}
+            />
+            <Route
+              path="/:id"
+              render={props => <ProfilePage {...props} key={props.match.params.id} />}
+            />
           </Switch>
         </Router>
-      </Fragment>
-    );
-  }
+      </IntlProvider>
+    </Fragment>
+  );
 }
 
 export default App;
