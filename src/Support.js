@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -32,25 +34,25 @@ function Support() {
   return (
     <StSupport>
       <Copyright>
-© 2018 Twitter
+        © 2018 Twitter
       </Copyright>
       <StLink to="/about">
-About
+        About
       </StLink>
       <StLink to="/help-center">
-Help Center
+        Help Center
       </StLink>
       <StLink to="/terms">
-Terms
+        Terms
       </StLink>
       <StLink to="/privacy-policy">
-Privacy policy
+        Privacy policy
       </StLink>
       <StLink to="/cookies">
-Cookies
+        Cookies
       </StLink>
       <StLink to="/ads-info">
-Ads info
+        Ads info
       </StLink>
     </StSupport>
   );

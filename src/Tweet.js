@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import styled from 'styled-components';
 import Preview from './Preview';
@@ -168,13 +170,28 @@ function Pinned() {
     <StPinned>
       <PinnedIcon src={iconPinned} />
       <PinnedDescr>
-Pinned Tweet
+        Pinned Tweet
       </PinnedDescr>
     </StPinned>
   );
 }
 
-function Tweet(props) {
+type Props = {
+  pinned: boolean,
+  tweetId: string,
+  avatar: string,
+  author: string,
+  authorName: string,
+  date: string,
+  text: string,
+  images: Array<Object>,
+  comments: string,
+  retweet: string,
+  loves: string,
+  envelope: string,
+};
+
+function Tweet(props: Props) {
   const {
     pinned,
     tweetId,
@@ -218,11 +235,11 @@ function Tweet(props) {
         </div>
 
         {text
-          && (text.length > 120 ? (
-            <Text dangerouslySetInnerHTML={{ __html: text }} />
-          ) : (
-            <TextBig dangerouslySetInnerHTML={{ __html: text }} />
-          ))}
+        && (text.length > 120 ? (
+          <Text dangerouslySetInnerHTML={{ __html: text }} />
+        ) : (
+          <TextBig dangerouslySetInnerHTML={{ __html: text }} />
+        ))}
 
         {images && images.length > 0 && images.map(img => <Image key={img.id} src={img.url} />)}
 
@@ -232,33 +249,33 @@ function Tweet(props) {
           <Action>
             <ActionIcon src={iconComments} alt="comments" />
             {(comments || !comments === 0) && (
-            <ActionValue>
-              {comments}
-            </ActionValue>
+              <ActionValue>
+                {comments}
+              </ActionValue>
             )}
           </Action>
           <Action>
             <ActionIcon src={iconRetweet} alt="retweet" />
             {(retweet || !retweet === 0) && (
-            <ActionValue>
-              {retweet}
-            </ActionValue>
+              <ActionValue>
+                {retweet}
+              </ActionValue>
             )}
           </Action>
           <Action>
             <ActionIcon src={iconLoves} alt="loves" />
             {(loves || !loves === 0) && (
-            <ActionValue>
-              {loves}
-            </ActionValue>
+              <ActionValue>
+                {loves}
+              </ActionValue>
             )}
           </Action>
           <Action>
             <ActionIcon src={iconEnvelope} alt="envelope" />
             {(envelope || !envelope === 0) && (
-            <ActionValue>
-              {envelope}
-            </ActionValue>
+              <ActionValue>
+                {envelope}
+              </ActionValue>
             )}
           </Action>
         </ActionList>
