@@ -1,6 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+// @flow
+
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const StSupport = styled.div``;
 
@@ -31,13 +33,27 @@ const StLink = styled(Link)`
 function Support() {
   return (
     <StSupport>
-      <Copyright>© 2018 Twitter</Copyright>
-      <StLink to="/about">About</StLink>
-      <StLink to="/helpCenter">Help Center</StLink>
-      <StLink to="/terms">Terms</StLink>
-      <StLink to="/privacyPolicy">Privacy policy</StLink>
-      <StLink to="/cookies">Cookies</StLink>
-      <StLink to="/adsInfo">Ads info</StLink>
+      <Copyright>
+        © 2018 Twitter
+      </Copyright>
+      <StLink to="/about">
+        About
+      </StLink>
+      <StLink to="/help-center">
+        Help Center
+      </StLink>
+      <StLink to="/terms">
+        Terms
+      </StLink>
+      <StLink to="/privacy-policy">
+        Privacy policy
+      </StLink>
+      <StLink to="/cookies">
+        Cookies
+      </StLink>
+      <StLink to="/ads-info">
+        Ads info
+      </StLink>
     </StSupport>
   );
 }

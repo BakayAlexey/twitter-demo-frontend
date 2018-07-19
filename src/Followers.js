@@ -1,7 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import iconFollowers from "./icons/icon-followers.svg";
+// @flow
+
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import iconFollowers from './icons/icon-followers.svg';
 
 const StFollowers = styled.div`
   padding: 15px 0;
@@ -50,55 +52,105 @@ const Img = styled.img`
 `;
 
 function Follower(props) {
+  const { to, img, description } = props;
   return (
-    <StFollower to={props.to}>
-      <Img src={props.img} alt={props.description} />
+    <StFollower to={to}>
+      <Img src={img} alt={description} />
     </StFollower>
   );
 }
 
-function Followers() {
-  return (
-    <StFollowers>
-      <Head>
-        <Icon src={iconFollowers} alt="followers" />
-        <Title to="/followers">6 Followers you know</Title>
-      </Head>
+type Props = {
+  id: string,
+};
 
-      <FollowersList>
-        <Follower
-          to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/followers1.jpg"}
-          description="followerDescr"
-        />
-        <Follower
-          to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/followers2.jpg"}
-          description="followerDescr"
-        />
-        <Follower
-          to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/followers3.jpg"}
-          description="followerDescr"
-        />
-        <Follower
-          to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/followers4.jpg"}
-          description="followerDescr"
-        />
-        <Follower
-          to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/followers5.jpg"}
-          description="followerDescr"
-        />
-        <Follower
-          to="/followerProfile"
-          img={process.env.PUBLIC_URL + "/img/followers6.jpg"}
-          description="followerDescr"
-        />
-      </FollowersList>
-    </StFollowers>
-  );
+type FollowersData = {
+  id: string,
+  avatar_static: string,
+  username: string,
+}
+
+type State = {
+  followersData: null | Array<FollowersData>| Object,
+  error: null | Object,
+};
+
+class Followers extends Component<Props, State> {
+  state = {
+    followersData: null,
+    error: null,
+  };
+
+  componentDidMount() {
+    const { id } = this.props;
+
+    const hostname = 'https://twitter-demo.erodionov.ru';
+    const secretKey = process.env.REACT_APP_KEY;
+    if (!secretKey) throw new Error('Missing REACT_APP_KEY');
+
+    fetch(`${hostname}/api/v1/accounts/${id}/followers?access_token=${secretKey}`)
+      .then(res => res.json())
+      .then(
+        (followersData) => {
+          this.setState({ followersData });
+        },
+        (error) => {
+          this.setState({ error });
+        },
+      );
+  }
+
+  render() {
+    const { followersData, error } = this.state;
+
+    if (!followersData) {
+      return (
+        <div>
+          No followers
+        </div>
+      );
+    }
+
+    if (error || (followersData && followersData.error)) {
+      return (
+        <div>
+          Error
+        </div>
+      );
+    }
+
+    if (followersData.length === 0) {
+      return (
+        <div>
+          Followers list is empty
+        </div>
+      );
+    }
+
+    const followersList = followersData.map(follower => (
+      <Follower
+        key={follower.id}
+        to={`/${follower.id}`}
+        img={follower.avatar_static}
+        description={follower.username}
+      />
+    ));
+
+    return (
+      <StFollowers>
+        <Head>
+          <Icon src={iconFollowers} alt="followers" />
+          <Title to="/followers">
+            6 Followers you know
+          </Title>
+        </Head>
+
+        <FollowersList>
+          {followersList}
+        </FollowersList>
+      </StFollowers>
+    );
+  }
 }
 
 export default Followers;

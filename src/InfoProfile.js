@@ -1,10 +1,12 @@
-import React from "react";
-import tick from "./icons/tick.svg";
-import iconLocation from "./icons/icon-location.svg";
-import iconLink from "./icons/icon-link.svg";
-import iconJoined from "./icons/icon-joined.svg";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+// @flow
+
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import tick from './icons/tick.svg';
+import iconLocation from './icons/icon-location.svg';
+import iconLink from './icons/icon-link.svg';
+import iconJoined from './icons/icon-joined.svg';
 
 const StInfoProfile = styled.div`
   padding: 30px 0;
@@ -72,7 +74,7 @@ const Follows = styled(Link)`
   }
 `;
 
-const Description = styled.p`
+const Description = styled.div`
   font-size: 14px;
   line-height: 20px;
   color: 14171a;
@@ -153,45 +155,90 @@ const Button = styled.button`
   }
 `;
 
-const InfoProfile = () => {
+type UserData = {
+  avatar_static: string,
+  display_name: string,
+  bot: boolean,
+  username: string,
+  note: string,
+  url: string,
+  created_at: string,
+}
+
+type Props = {
+  userData: UserData
+}
+
+function InfoProfile(props: Props) {
+  const {
+    userData: {
+      avatar_static: avatarStatic,
+      display_name: displayName,
+      bot,
+      username,
+      note,
+      url,
+      created_at: createdAt,
+    },
+  } = props;
   return (
     <StInfoProfile>
       <AvatarWrap>
-        <Avatar
-          src={process.env.PUBLIC_URL + "/img/avatar-big.png"}
-          alt="profile_image"
-        />
+        <Avatar src={avatarStatic} alt="profile_image" />
       </AvatarWrap>
       <div>
-        <Name>Every Interaction</Name>
-        <Verified src={tick} alt="verified" />
+        <Name>
+          {displayName}
+        </Name>
+        {!bot && <Verified src={tick} alt="verified" />}
       </div>
       <div>
-        <NameLink to="EveryInteract">@EveryInteract</NameLink>
-        <Follows to="/followers">Follows you</Follows>
+        <NameLink to="EveryInteract">
+          {`@${username}`}
+        </NameLink>
+        <Follows to="/followers">
+          Follows you
+        </Follows>
       </div>
-      <Description>
-        UX Design studio focussed problem solving creativity. Design to us is
-        how can we make things *work* amazing.
-      </Description>
+      <Description
+        dangerouslySetInnerHTML={{
+          __html: note,
+        }}
+      />
       <Location>
         <Img src={iconLocation} alt="location" />
-        <span>London, UK </span>
+        <span>
+          any place of  the world
+        </span>
       </Location>
       <LinkSite>
         <Img src={iconLink} alt="link site" />
-        <a href="everyinteraction.com">everyinteraction.com</a>
+        <a href={url}>
+          {url}
+        </a>
       </LinkSite>
       <Joined>
         <Img src={iconJoined} alt="joined" />
-        <span>Joined May 2008</span>
+        <span>
+          {`Joined ${new Date(createdAt).toLocaleString(
+            'en-US',
+            {
+              year: 'numeric',
+              month: 'long',
+            },
+          )}`}
+        </span>
       </Joined>
       <BtnGroup>
-        <Button>Tweet to</Button>
-        <Button>Message</Button>
+        <Button>
+          Tweet to
+        </Button>
+        <Button>
+          Message
+        </Button>
       </BtnGroup>
     </StInfoProfile>
   );
-};
+}
 
 export default InfoProfile;

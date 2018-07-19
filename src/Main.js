@@ -1,14 +1,18 @@
-import React from "react";
-import Bar from "./Bar";
-import InfoProfile from "./InfoProfile";
-import Followers from "./Followers";
-import Gallery from "./Gallery";
-import Tweets from "./Tweets";
-import Follows from "./Follows";
-import Trends from "./Trends";
-import Support from "./Support";
-import { Grid, Row, Col } from "react-flexbox-grid";
-import styled from "styled-components";
+// @flow
+
+import React, { Fragment } from 'react';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import styled from 'styled-components';
+import { Route, Switch } from 'react-router-dom';
+import type { Match } from 'react-router-dom';
+import Bar from './Bar';
+import InfoProfile from './InfoProfile';
+import Followers from './Followers';
+import Galleries from './Galleries';
+import Tweets from './Tweets';
+import Follows from './Follows';
+import Trends from './Trends';
+import Support from './Support';
 
 const ProfileImg = styled.img`
   display: block;
@@ -24,30 +28,103 @@ const ProfileContent = styled.div`
   background-color: #e6ecf0;
 `;
 
-function Main() {
+type UserData = {
+  id: string,
+  username: string,
+  acct: string,
+  display_name: string,
+  locked: boolean,
+  bot: boolean,
+  created_at: string,
+  note: string,
+  url: string,
+  avatar: string,
+  avatar_static: string,
+  header: string,
+  header_static: string,
+  followers_count: number,
+  following_count: number,
+  statuses_count: number,
+  error?: string,
+};
+
+type Props = {
+  match: Match,
+  userData: UserData,
+};
+
+function Main(props: Props) {
+  const { match, userData } = props;
   return (
     <main>
-      <ProfileImg
-        src={process.env.PUBLIC_URL + "/img/profile-image.jpg"}
-        alt="profile_image"
-      />
+      <ProfileImg src={userData.header_static} alt="profile_image" />
       <Bar />
       <ProfileContent>
         <Grid>
           <Row>
             <Col md={3}>
-              <InfoProfile />
-              <Followers />
-              <Gallery />
+              <InfoProfile userData={userData} />
+              <Followers id={userData.id} />
+              <Galleries />
             </Col>
-            <Col md={6}>
-              <Tweets />
-            </Col>
-            <Col md={3}>
-              <Follows />
-              <Trends />
-              <Support />
-            </Col>
+
+            <Switch>
+              <Route
+                path={`${match.url}/following`}
+                render={() => (
+                  <Col md={9}>
+                    <h2>
+                      following
+                    </h2>
+                  </Col>
+                )}
+              />
+              <Route
+                path={`${match.url}/followers`}
+                render={() => (
+                  <Col md={9}>
+                    <h2>
+                      followers
+                    </h2>
+                  </Col>
+                )}
+              />
+              <Route
+                path={`${match.url}/likes`}
+                render={() => (
+                  <Col md={9}>
+                    <h2>
+                      likes
+                    </h2>
+                  </Col>
+                )}
+              />
+              <Route
+                path={`${match.url}/lists`}
+                render={() => (
+                  <Col md={9}>
+                    <h2>
+                      lists
+                    </h2>
+                  </Col>
+                )}
+              />
+              <Route
+                path={`${match.url}`}
+                render={() => (
+                  <Fragment>
+                    <Col md={6}>
+                      <Tweets id={userData.id} />
+                    </Col>
+                    <Col md={3}>
+                      <Follows />
+                      <Trends />
+                      <Support />
+                    </Col>
+                  </Fragment>
+                )}
+              />
+            </Switch>
           </Row>
         </Grid>
       </ProfileContent>

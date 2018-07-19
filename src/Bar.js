@@ -1,14 +1,19 @@
-import React from "react";
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import { Grid, Row, Col } from "react-flexbox-grid";
+// @flow
+
+import React from 'react';
+import styled from 'styled-components';
+import { NavLink, withRouter } from 'react-router-dom';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import { FormattedMessage } from 'react-intl';
 
 const Nav = styled.div`
   display: flex;
   margin-right: auto;
 `;
 
-const Name = styled.div``;
+const Name = styled.div`
+  color: #707e88;
+`;
 
 const Amount = styled.div`
   font-size: 18px;
@@ -27,11 +32,12 @@ const StLink = styled(NavLink)`
   color: #707e88;
   text-align: center;
   text-decoration: none;
+  &.active,
   &:hover {
     color: #1da1f2;
     border-bottom: 4px solid #1da1f2;
   }
-  &:hover ${Amount} {
+  &.active ${Amount}, &:hover ${Amount} {
     color: #1da1f2;
   }
 `;
@@ -83,7 +89,7 @@ const IconMore = styled.div`
   border: 1px solid #6c7e8e;
   border-radius: 50%;
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: -1px;
     left: -1px;
@@ -94,7 +100,7 @@ const IconMore = styled.div`
     transform: translate(0, -5px);
   }
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: -1px;
     left: -1px;
@@ -106,34 +112,95 @@ const IconMore = styled.div`
   }
 `;
 
-const Statistics = () => {
-  return (
-    <Nav>
-      <StLink to="/tweets">
-        <Name>Tweets</Name>
-        <Amount>8,058</Amount>
-      </StLink>
-      <StLink to="/following">
-        <Name>Following</Name>
-        <Amount>721</Amount>
-      </StLink>
-      <StLink to="/followers">
-        <Name>Followers</Name>
-        <Amount>1,815</Amount>
-      </StLink>
-      <StLink to="/likes">
-        <Name>Likes</Name>
-        <Amount>460</Amount>
-      </StLink>
-      <StLink to="/lists">
-        <Name>Lists</Name>
-        <Amount>2</Amount>
-      </StLink>
-    </Nav>
-  );
+const navData = {
+  amountTweets: 8058,
+  amountFollowing: 721,
+  amountFollowers: 1815,
+  amountLikes: 460,
+  amountLists: 2,
 };
 
-const Bar = () => {
+const isActiveLinkTweets = (match, location) => {
+  const matches = [`${match.url}`, `${match.url}/tweets-replies`, `${match.url}/media`];
+  return matches.includes(location.pathname);
+};
+
+const Statistics = withRouter(({ match }) => (
+  <Nav>
+    <StLink to={`${match.url}`} isActive={isActiveLinkTweets}>
+      <Name>
+Tweets
+      </Name>
+      <Amount>
+        <FormattedMessage
+          id="tweets"
+          defaultMessage={'{count, number}'}
+          values={{
+            count: navData.amountTweets,
+          }}
+        />
+      </Amount>
+    </StLink>
+    <StLink to={`${match.url}/following`}>
+      <Name>
+Following
+      </Name>
+      <Amount>
+        <FormattedMessage
+          id="following"
+          defaultMessage={'{count, number}'}
+          values={{
+            count: navData.amountFollowing,
+          }}
+        />
+      </Amount>
+    </StLink>
+    <StLink to={`${match.url}/followers`}>
+      <Name>
+Followers
+      </Name>
+      <Amount>
+        <FormattedMessage
+          id="followers"
+          defaultMessage={'{count, number}'}
+          values={{
+            count: navData.amountFollowers,
+          }}
+        />
+      </Amount>
+    </StLink>
+    <StLink to={`${match.url}/likes`}>
+      <Name>
+Likes
+      </Name>
+      <Amount>
+        <FormattedMessage
+          id="likes"
+          defaultMessage={'{count, number}'}
+          values={{
+            count: navData.amountLikes,
+          }}
+        />
+      </Amount>
+    </StLink>
+    <StLink to={`${match.url}/lists`}>
+      <Name>
+Lists
+      </Name>
+      <Amount>
+        <FormattedMessage
+          id="lists"
+          defaultMessage={'{count, number}'}
+          values={{
+            count: navData.amountLists,
+          }}
+        />
+      </Amount>
+    </StLink>
+  </Nav>
+));
+
+function Bar() {
   return (
     <BarStyled>
       <Grid>
@@ -141,7 +208,9 @@ const Bar = () => {
           <Col mdOffset={3} md={9}>
             <Content>
               <Statistics />
-              <Button>Follow</Button>
+              <Button>
+Follow
+              </Button>
               <BtnMore>
                 <IconMore />
               </BtnMore>
@@ -151,6 +220,6 @@ const Bar = () => {
       </Grid>
     </BarStyled>
   );
-};
+}
 
 export default Bar;
